@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRef, type PointerEvent } from "react";
+import { useEffect, useRef, useState, type PointerEvent } from "react";
 
 const strengths = ["Manual Therapy", "Therapeutic Exercise", "Sports Rehabilitation", "Shockwave Therapy", "กายภาพบำบัดที่บ้าน", "เครื่องมือกายภาพบำบัดมาตรฐาน"];
 const techniques = ["Joint Mobilization", "Soft Tissue Technique", "Myofascial Release", "Trigger Point Technique", "Stretching", "Movement Correction"];
@@ -55,6 +55,42 @@ function ChiangRaiLines() {
   </svg>;
 }
 
+function FooterVisitorCount() {
+  const [count, setCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    const loadCount = async () => {
+      try {
+        const hasCounted = sessionStorage.getItem("trehab-visitor-counted") === "1";
+        const response = await fetch("/api/visitor-count", {
+          method: hasCounted ? "GET" : "POST",
+          cache: "no-store",
+        });
+        if (!response.ok) return;
+
+        const data = (await response.json()) as { count?: number };
+        if (typeof data.count === "number") {
+          setCount(data.count);
+          if (!hasCounted) sessionStorage.setItem("trehab-visitor-counted", "1");
+        }
+      } catch {
+        // Keep the footer usable when the counter service is unavailable.
+      }
+    };
+
+    void loadCount();
+  }, []);
+
+  return (
+    <p className="trehab-visitor-count" aria-live="polite">
+      <span aria-hidden="true">◉</span>
+      จำนวนผู้เข้าชมเว็บไซต์
+      <strong>{count === null ? "—" : count.toLocaleString("th-TH")}</strong>
+      <small>ครั้ง</small>
+    </p>
+  );
+}
+
 export default function Home() {
   const athleteRef = useRef<HTMLDivElement>(null);
 
@@ -101,7 +137,7 @@ export default function Home() {
     <section className="exercise" id="exercise-rehabilitation">
       <div className="exercise-head shell trehab-service-heading">
         <div><p className="section-kicker light">EXERCISE REHABILITATION</p><h2>โปรแกรมกายภาพบำบัด<br/><span>และฟื้นฟูสมรรถภาพ</span></h2></div>
-        <p><strong>ดูแลตั้งแต่อาการปวดและการบาดเจ็บ การฟื้นฟูหลังผ่าตัด ผู้ป่วยโรคหลอดเลือดสมองและผู้ป่วยระยะกลาง (IMC) ไปจนถึงการเตรียมความพร้อมเพื่อกลับไปออกกำลังกายและเล่นกีฬา</strong> โปรแกรมกายภาพบำบัดเชียงรายของ TREHAB วางแผนตามผลการประเมินและเป้าหมายของแต่ละบุคคล</p>
+        <p><strong>ดูแลตั้งแต่อาการปวดและการบาดเจ็บ การฟื้นฟูหลังผ่าตัด ผู้ป่วยโรคหลอดเลือดสมองและผู้ป่วยระยะกลาง (IMC) ไปจนถึงการเตรียมความพร้อมเพื่อกลับไปออกกำลังกายและเล่นกีฬา</strong> โปรแกรม TREHAB วางแผนตามผลการประเมินและเป้าหมายของแต่ละบุคคล</p>
       </div>
       <div className="exercise-media shell">
         <div className="exercise-photo"><Image src="/assets/exercise-rehabilitation.png" fill sizes="(max-width: 900px) 100vw, 60vw" alt="นักกายภาพบำบัดแนะนำการฝึก Exercise Rehabilitation"/><div className="training-strip">{trainingTypes.map((item,index)=><span key={item}><b>0{index+1}</b>{item}</span>)}</div></div>
@@ -134,7 +170,7 @@ export default function Home() {
       <div className="contact-panel"><p className="section-kicker light">VISIT TREHAB</p><h2>แผนที่และ<br/>ข้อมูลติดต่อ</h2><p className="place-name">ธรีแฮปคลินิกกายภาพบำบัด บ้านหัวฝาย อำเภอเมือง จังหวัดเชียงราย <span>ใกล้น้ำเงี้ยวป้าลี</span></p><dl><div><dt>ที่อยู่</dt><dd>บ้านหัวฝาย อำเภอเมือง จังหวัดเชียงราย</dd></div><div><dt>เวลาทำการ</dt><dd>จันทร์–ศุกร์ 16.45–21.00 น.<br/>เสาร์–อาทิตย์และวันหยุด 07.00–21.00 น.</dd></div><div><dt>โทรศัพท์</dt><dd><a href="tel:0929390919">092-939-0919</a></dd></div><div><dt>อีเมล</dt><dd><a href="mailto:trehab@welkub.com">trehab@welkub.com</a></dd></div><div><dt>LINE Official Account</dt><dd><a href="https://line.me/R/ti/p/@trehab" target="_blank" rel="noreferrer">@trehab</a></dd></div></dl><div className="contact-actions"><a href="https://maps.app.goo.gl/NsX5Si1m41ZtNC5F7" target="_blank" rel="noreferrer">เปิดใน Google Maps</a><a href="tel:0929390919">โทรเลย</a><a className="action-line" href="https://line.me/R/ti/p/@trehab" target="_blank" rel="noreferrer">แชตผ่าน LINE</a></div></div>
     </section>
     <section className="final-cta"><div className="shell"><p className="section-kicker light">START YOUR RECOVERY</p><h2>ฟื้นฟูอย่างเป็นระบบ<br/><span>กลับไปเคลื่อนไหวและออกกำลังกายอย่างมั่นใจ</span></h2><p>เริ่มต้นด้วยการประเมินจากนักกายภาพบำบัดที่ TREHAB Physiotherapy Clinic</p><div className="cta-buttons"><a href="https://line.me/R/ti/p/@trehab" target="_blank" rel="noreferrer">จองคิวออนไลน์</a><a href="https://line.me/R/ti/p/@trehab" target="_blank" rel="noreferrer">ปรึกษาผ่าน LINE</a><a href="tel:0929390919">โทร 092-939-0919</a></div></div></section>
-    <footer className="footer"><div className="footer-grid shell"><div className="footer-brand"><a href="#top"><Image src="/assets/trehab-logo-current.svg" width={165} height={62} alt="โลโก้ TREHAB"/></a><p>คลินิกกายภาพบำบัดที่ให้ความสำคัญกับการประเมิน การรักษา และการฟื้นฟูเฉพาะบุคคล เพื่อการกลับไปเคลื่อนไหวอย่างเหมาะสม</p></div><div><h3>เมนูเว็บไซต์</h3><a href="#manual-therapy">Manual Therapy</a><a href="#exercise-rehabilitation">Exercise Rehabilitation</a><a href="#trehab-4t">TREHAB 4T</a><a href="#about-trehab">เกี่ยวกับ TREHAB</a><a href="#physiotherapists">ทีมกายภาพบำบัด</a><Link href="/articles">บทความ</Link></div><div><h3>บริการ</h3><a href="#exercise-rehabilitation">Sports Rehabilitation</a><a href="#exercise-rehabilitation">Therapeutic Exercise</a><a href="#manual-therapy">Manual Therapy</a><a href="#contact">กายภาพบำบัดที่บ้าน</a><a href="#contact">Shockwave Therapy</a></div><div><h3>ข้อมูลติดต่อ</h3><a href="tel:0929390919">092-939-0919</a><a href="https://line.me/R/ti/p/@trehab" target="_blank" rel="noreferrer">LINE @trehab</a><a href="https://maps.app.goo.gl/NsX5Si1m41ZtNC5F7" target="_blank" rel="noreferrer">Google Maps</a><a href="#contact">ติดต่อคลินิก</a><a href="https://www.facebook.com/" target="_blank" rel="noreferrer">Facebook</a></div></div><div className="footer-bottom shell"><p>© {new Date().getFullYear()} TREHAB Physiotherapy Clinic. All rights reserved.</p><div><a href="/privacy-policy">นโยบายความเป็นส่วนตัว</a><a href="/cookie-policy">นโยบาย Cookies</a><a href="/terms">ข้อกำหนดการใช้บริการ</a></div></div></footer>
+    <footer className="footer"><div className="footer-grid shell"><div className="footer-brand"><a href="#top"><Image src="/assets/trehab-logo-current.svg" width={165} height={62} alt="โลโก้ TREHAB"/></a><p>คลินิกกายภาพบำบัดที่ให้ความสำคัญกับการประเมิน การรักษา และการฟื้นฟูเฉพาะบุคคล เพื่อการกลับไปเคลื่อนไหวอย่างเหมาะสม</p><FooterVisitorCount/></div><div><h3>เมนูเว็บไซต์</h3><a href="#manual-therapy">Manual Therapy</a><a href="#exercise-rehabilitation">Exercise Rehabilitation</a><a href="#trehab-4t">TREHAB 4T</a><a href="#about-trehab">เกี่ยวกับ TREHAB</a><a href="#physiotherapists">ทีมกายภาพบำบัด</a><Link href="/articles">บทความ</Link></div><div><h3>บริการ</h3><a href="#exercise-rehabilitation">Sports Rehabilitation</a><a href="#exercise-rehabilitation">Therapeutic Exercise</a><a href="#manual-therapy">Manual Therapy</a><a href="#contact">กายภาพบำบัดที่บ้าน</a><a href="#contact">Shockwave Therapy</a></div><div><h3>ข้อมูลติดต่อ</h3><a href="tel:0929390919">092-939-0919</a><a href="https://line.me/R/ti/p/@trehab" target="_blank" rel="noreferrer">LINE @trehab</a><a href="https://maps.app.goo.gl/NsX5Si1m41ZtNC5F7" target="_blank" rel="noreferrer">Google Maps</a><a href="#contact">ติดต่อคลินิก</a><a href="https://www.facebook.com/" target="_blank" rel="noreferrer">Facebook</a></div></div><div className="footer-bottom shell"><p>© {new Date().getFullYear()} TREHAB Physiotherapy Clinic. All rights reserved.</p><div><a href="/privacy-policy">นโยบายความเป็นส่วนตัว</a><a href="/cookie-policy">นโยบาย Cookies</a><a href="/terms">ข้อกำหนดการใช้บริการ</a></div></div></footer>
     <div className="floating-actions" aria-label="ทางลัดติดต่อ"><a className="float-line" href="https://line.me/R/ti/p/@trehab" target="_blank" rel="noreferrer" aria-label="แชตผ่าน LINE"><span>LINE</span><b>แชต</b></a><a href="tel:0929390919" aria-label="โทรศัพท์"><span>☎</span><b>โทร</b></a><a href="https://line.me/R/ti/p/@trehab" target="_blank" rel="noreferrer" aria-label="จองคิว"><span>＋</span><b>จองคิว</b></a><a href="#top" aria-label="กลับขึ้นด้านบน"><span>↑</span><b>ด้านบน</b></a></div>
   </main>;
 }
