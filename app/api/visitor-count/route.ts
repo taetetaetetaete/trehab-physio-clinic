@@ -6,7 +6,7 @@ const COUNTER_ID = "trehab-website";
 
 export async function GET() {
   try {
-    const db = getDb();
+    const db = await getDb();
     const row = await db.query.visitorCounts.findFirst({
       where: (table, { eq }) => eq(table.id, COUNTER_ID),
       columns: { count: true },
@@ -23,7 +23,7 @@ export async function GET() {
 
 export async function POST() {
   try {
-    const db = getDb();
+    const db = await getDb();
     const [row] = await db
       .insert(visitorCounts)
       .values({ id: COUNTER_ID, count: 1 })
