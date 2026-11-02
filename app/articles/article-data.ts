@@ -463,7 +463,7 @@ export const articles: TrehabArticle[] = [
     category: "PAIN & SPORTS RECOVERY",
     title: "ประคบร้อนหรือประคบเย็น? แช่น้ำแข็งหรือแช่น้ำร้อน ควรทำตอนไหน",
     excerpt: "เปรียบเทียบการใช้ความร้อนและความเย็นสำหรับอาการปวด การบาดเจ็บจากกีฬา และการฟื้นตัวหลังออกกำลังกาย พร้อมข้อควรระวังที่ควรรู้",
-    image: "/assets/hot-vs-cold-therapy-v2.png",
+    image: "/assets/hot-vs-cold-therapy-v3.jpg",
     imageAlt: "ภาพเปรียบเทียบการใช้ถุงประคบเย็นที่ข้อเท้าและถุงประคบอุ่นที่หัวไหล่",
     readingTime: "อ่านประมาณ 12 นาที",
     sections: [
@@ -570,7 +570,7 @@ export const articles: TrehabArticle[] = [
     category: "SPORTS INJURY",
     title: "บาดเจ็บเฉียบพลันควรทำอย่างไร? จาก RICE สู่ POLICE และ PEACE & LOVE",
     excerpt: "ทำความเข้าใจวิวัฒนาการการดูแลการบาดเจ็บจากกีฬา จากการพักและจัดการอาการ สู่ Optimal Loading และ Active Rehabilitation เพื่อกลับไปทำกิจกรรมอย่างเหมาะสม",
-    image: "/assets/peace-love-sports-injury-v2.png",
+    image: "/assets/peace-love-sports-injury-v3.jpg",
     imageAlt: "นักกีฬาหญิงตั้งแต่ช่วงปกป้องข้อเท้าหลังบาดเจ็บจนถึงการฝึกทรงตัวกับนักกายภาพบำบัด",
     readingTime: "อ่านประมาณ 14 นาที",
     sections: [
