@@ -17,6 +17,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${article.title} | TREHAB`,
     description: article.excerpt,
+    keywords: article.slug === "apbc-technique-athletes-origin-benefits"
+      ? ["APBC Technique", "Advanced Postural Biomechanical Correction", "APBC นักกีฬา", "APBC ต้นกำเนิด", "Manual Therapy", "Sports Rehabilitation", "กายภาพบำบัดนักกีฬาเชียงราย"]
+      : undefined,
     alternates: { canonical: `/articles/${article.slug}` },
     openGraph: { title: article.title, description: article.excerpt, type: "article", images: [article.image], ...(article.publishedIso ? { publishedTime: article.publishedIso, modifiedTime: article.publishedIso } : {}) },
   };
@@ -39,7 +42,18 @@ export default async function ArticlePage({ params }: PageProps) {
     publisher: { "@type": "Organization", name: "TREHAB Physiotherapy Clinic" },
     mainEntityOfPage: "https://www.trehabphysio.com/articles/" + article.slug,
   } : null;
+  const faqEntries = article.sections.filter((section) => section.heading.startsWith("คำถามที่พบบ่อย:") && section.paragraphs?.length);
+  const faqSchema = faqEntries.length ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqEntries.map((section) => ({
+      "@type": "Question",
+      name: section.heading.replace("คำถามที่พบบ่อย:", "").trim(),
+      acceptedAnswer: { "@type": "Answer", text: section.paragraphs?.[0] ?? "" },
+    })),
+  } : null;
   return <main className="trehab-article-detail" id="top">
+    {faqSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}/>} 
     {schema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}/>}
     <nav className="trehab-policy-nav" aria-label="เมนูหน้าบทความ"><div className="shell"><Link className="trehab-policy-logo" href="/" aria-label="กลับหน้าหลัก TREHAB"><Image src="/assets/trehab-logo-current.svg" width={180} height={62} alt="โลโก้ TREHAB" priority/></Link><div className="trehab-article-nav"><Link href="/">หน้าหลัก</Link><Link href="/articles">บทความ</Link><Link href="/#contact">ติดต่อคลินิก</Link></div></div></nav>
     <article>
