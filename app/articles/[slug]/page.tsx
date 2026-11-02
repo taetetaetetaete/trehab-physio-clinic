@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `${article.title} | TREHAB`,
     description: article.excerpt,
     alternates: { canonical: `/articles/${article.slug}` },
-    openGraph: { title: article.title, description: article.excerpt, type: "article", images: [article.image] },
+    openGraph: { title: article.title, description: article.excerpt, type: "article", images: [article.image], ...(article.publishedIso ? { publishedTime: article.publishedIso, modifiedTime: article.publishedIso } : {}) },
   };
 }
 
@@ -26,10 +26,24 @@ export default async function ArticlePage({ params }: PageProps) {
   const { slug } = await params;
   const article = findArticle(slug);
   if (!article) notFound();
+  const schema = article.publishedIso ? {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: article.title,
+    description: article.excerpt,
+    image: "https://www.trehabphysio.com" + article.image,
+    datePublished: article.publishedIso,
+    dateModified: article.publishedIso,
+    inLanguage: "th-TH",
+    author: { "@type": "Organization", name: "TREHAB Physiotherapy Clinic" },
+    publisher: { "@type": "Organization", name: "TREHAB Physiotherapy Clinic" },
+    mainEntityOfPage: "https://www.trehabphysio.com/articles/" + article.slug,
+  } : null;
   return <main className="trehab-article-detail" id="top">
+    {schema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}/>}
     <nav className="trehab-policy-nav" aria-label="เมนูหน้าบทความ"><div className="shell"><Link className="trehab-policy-logo" href="/" aria-label="กลับหน้าหลัก TREHAB"><Image src="/assets/trehab-logo-current.svg" width={180} height={62} alt="โลโก้ TREHAB" priority/></Link><div className="trehab-article-nav"><Link href="/">หน้าหลัก</Link><Link href="/articles">บทความ</Link><Link href="/#contact">ติดต่อคลินิก</Link></div></div></nav>
     <article>
-      <header className="trehab-article-detail-header"><div className="shell"><div className="trehab-article-breadcrumb"><Link href="/articles">บทความ</Link><span aria-hidden="true">/</span><span>{article.category}</span></div><p className="section-kicker">{article.category}</p><h1>{article.title}</h1><p className="trehab-article-lead">{article.excerpt}</p><div className="trehab-article-byline"><span>{article.isSample ? "บทความตัวอย่าง" : "บทความสุขภาพ"}</span><span>{article.readingTime}</span><span>ปรับปรุงล่าสุด 31 สิงหาคม 2569</span></div></div></header>
+      <header className="trehab-article-detail-header"><div className="shell"><div className="trehab-article-breadcrumb"><Link href="/articles">บทความ</Link><span aria-hidden="true">/</span><span>{article.category}</span></div><p className="section-kicker">{article.category}</p><h1>{article.title}</h1><p className="trehab-article-lead">{article.excerpt}</p><div className="trehab-article-byline"><span>{article.isSample ? "บทความตัวอย่าง" : "บทความสุขภาพ"}</span><span>{article.readingTime}</span><span>ปรับปรุงล่าสุด {article.updatedAt ?? "31 สิงหาคม 2569"}</span></div></div></header>
       <div className="trehab-article-cover shell"><Image src={article.image} fill sizes="(max-width: 900px) 100vw, 1100px" alt={article.imageAlt} priority/></div>
       {article.exerciseGuide && <section className="trehab-exercise-guide shell" aria-labelledby="exercise-guide-title">
         <p className="section-kicker">MOVEMENT BREAK</p>
