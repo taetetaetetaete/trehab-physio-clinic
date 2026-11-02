@@ -34,6 +34,18 @@
 @media(max-width:800px){.trehab-google-reviews{grid-template-columns:58px 1fr;padding:28px 24px}.trehab-google-review-mark{width:54px;height:54px;font-size:27px}.trehab-google-reviews>a{grid-column:1/-1;justify-content:space-between;width:100%}}
 @media(max-width:640px){.trehab-trust-bar>div>div{padding:13px 15px;gap:0}.trehab-google-reviews{grid-template-columns:1fr;gap:18px;padding:25px 20px}.trehab-google-review-mark{width:48px;height:48px}.trehab-google-reviews>a{grid-column:auto;font-size:12px;white-space:normal}.trehab-google-reviews h3{font-size:18px}}
 
+.reviews-heading .trehab-google-reviews{grid-template-columns:54px minmax(0,1fr);gap:18px;padding:24px 26px}
+.reviews-heading .trehab-google-review-mark{width:52px;height:52px;font-size:25px}
+.reviews-heading .trehab-google-stars{font-size:17px}
+.reviews-heading .trehab-google-reviews h3{margin-top:4px;font-size:18px}
+.reviews-heading .trehab-google-reviews>a{grid-column:1/-1;justify-content:space-between}
+.trehab-google-review-card{border-style:solid;border-color:#cfe3ed;background:linear-gradient(160deg,#fff,#f4fbfe);box-shadow:0 16px 38px rgba(6,70,122,.06)}
+.trehab-google-review-card .review-state{color:#4285f4}
+.review-card-stars{color:#f5b400!important;font-size:16px!important;letter-spacing:.08em}
+.review-source-link{display:flex;align-items:center;justify-content:space-between;margin-top:15px;color:#0872aa;text-decoration:none;font-size:11px;font-weight:800}
+.review-source-link:hover{color:#0754b8}
+@media(max-width:640px){.reviews-heading .trehab-google-reviews{grid-template-columns:46px minmax(0,1fr);padding:22px 20px}.reviews-heading .trehab-google-review-mark{width:46px;height:46px}.reviews-heading .trehab-google-reviews>a{grid-column:1/-1}.trehab-google-review-card{min-height:0}}
+
 /* Chiang Rai return-to-sport hero */
 .hero{min-height:810px;color:#073d78;background:#eefaff}.hero:before{z-index:1;opacity:1;background:linear-gradient(90deg,rgba(255,255,255,.98) 0%,rgba(255,255,255,.91) 35%,rgba(255,255,255,.48) 56%,rgba(255,255,255,.06) 78%)}.hero-background{position:absolute;inset:0;z-index:0;background:url('/assets/hero-chiangrai-background.png') center bottom/cover no-repeat}.hero-glow{z-index:1;left:73%;bottom:-210px;background:radial-gradient(circle,rgba(79,194,239,.28),rgba(67,163,225,.08) 60%,transparent 72%)}.chiangrai-lines{display:none}.site-header,.hero-copy,.hero-athletes{z-index:5}.hero-copy{max-width:none}.eyebrow{color:#168dc4}.hero h1{color:#073d78;text-shadow:0 2px 18px rgba(255,255,255,.8)}.hero h1 span{color:#087fc2}.hero-note{color:#52728f}.hero .line-button{color:#fff;background:linear-gradient(135deg,#0755b0,#079acb);box-shadow:0 18px 42px rgba(4,84,157,.22)}.hero .line-mark{background:#08b750}.hero-athletes{position:absolute;right:1.5%;bottom:0;width:min(58vw,870px);height:670px;filter:drop-shadow(0 24px 24px rgba(4,76,140,.18));pointer-events:none}.hero-athletes img{object-fit:contain;object-position:right bottom}
 @media(max-width:1000px){.hero{min-height:1020px}.hero:before{background:linear-gradient(180deg,rgba(255,255,255,.96) 0%,rgba(255,255,255,.87) 42%,rgba(255,255,255,.28) 68%,rgba(255,255,255,.02) 100%)}.hero-copy{padding-top:70px}.hero-athletes{right:50%;transform:translateX(50%);width:min(94vw,820px);height:590px}.hero-background{background-position:58% bottom}}
