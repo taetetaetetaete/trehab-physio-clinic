@@ -8,7 +8,6 @@ type PageProps = { params: Promise<{ slug: string }> };
 
 const SITE_URL = "https://www.trehabphysio.com";
 const articleKeywords: Record<string, string[]> = {
-  "apbc-technique-athletes-origin-benefits": ["APBC Technique", "Manual Therapy", "Sports Rehabilitation", "กายภาพบำบัดนักกีฬา", "กายภาพบำบัดเชียงราย"],
   "manual-lymphatic-drainage-athlete-recovery": ["Manual Lymphatic Drainage", "MLD นักกีฬา", "ลดบวมหลังออกกำลังกาย", "Sports Recovery", "กายภาพบำบัดเชียงราย"],
   "what-is-physical-therapy": ["กายภาพบำบัดคืออะไร", "คลินิกกายภาพบำบัดเชียงราย", "ฟื้นฟูหลังผ่าตัด", "Stroke Rehabilitation", "IMC"],
   "office-syndrome-warning-signs": ["ออฟฟิศซินโดรม", "ปวดคอ บ่า ไหล่", "ปวดหลัง", "ท่ายืดออฟฟิศซินโดรม", "กายภาพบำบัดเชียงราย"],

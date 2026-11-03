@@ -25,7 +25,7 @@ export type TrehabArticle = {
   sections: ArticleSection[];
 };
 
-export const articles: TrehabArticle[] = [
+const articleLibrary: TrehabArticle[] = [
   {
     "slug": "apbc-technique-athletes-origin-benefits",
     "category": "SPORTS REHABILITATION",
@@ -725,6 +725,10 @@ export const articles: TrehabArticle[] = [
     ],
   },
 ];
+
+const retiredArticleSlugs = new Set(["apbc-technique-athletes-origin-benefits"]);
+
+export const articles = articleLibrary.filter((article) => !retiredArticleSlugs.has(article.slug));
 
 export function findArticle(slug: string) {
   return articles.find((article) => article.slug === slug);
