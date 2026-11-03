@@ -8,6 +8,11 @@ type PageProps = { params: Promise<{ slug: string }> };
 
 const SITE_URL = "https://www.trehabphysio.com";
 const articleKeywords: Record<string, string[]> = {
+  "low-back-pain-physiotherapy": ["ปวดหลัง", "กายภาพบำบัดปวดหลัง", "ปวดหลังเชียงราย", "Exercise Therapy", "คลินิกกายภาพบำบัดเชียงราย"],
+  "knee-pain-walking-running-stairs": ["ปวดเข่า", "ปวดเข่าเวลาขึ้นบันได", "กายภาพบำบัดเข่า", "Patellofemoral Pain", "กายภาพบำบัดเชียงราย"],
+  "plantar-heel-pain-return-to-walking-running": ["รองช้ำ", "ปวดส้นเท้า", "Plantar Heel Pain", "กายภาพบำบัดนักวิ่ง", "กายภาพบำบัดเชียงราย"],
+  "return-to-running-after-injury": ["Return to Running", "กลับไปวิ่งหลังบาดเจ็บ", "Running Rehabilitation", "กายภาพบำบัดนักวิ่ง", "เชียงราย"],
+  "return-to-sport-readiness": ["Return to Sport", "Sports Rehabilitation", "ประเมินก่อนกลับไปเล่นกีฬา", "กายภาพบำบัดนักกีฬา", "เชียงราย"],
   "manual-lymphatic-drainage-athlete-recovery": ["Manual Lymphatic Drainage", "MLD นักกีฬา", "ลดบวมหลังออกกำลังกาย", "Sports Recovery", "กายภาพบำบัดเชียงราย"],
   "what-is-physical-therapy": ["กายภาพบำบัดคืออะไร", "คลินิกกายภาพบำบัดเชียงราย", "ฟื้นฟูหลังผ่าตัด", "Stroke Rehabilitation", "IMC"],
   "office-syndrome-warning-signs": ["ออฟฟิศซินโดรม", "ปวดคอ บ่า ไหล่", "ปวดหลัง", "ท่ายืดออฟฟิศซินโดรม", "กายภาพบำบัดเชียงราย"],
