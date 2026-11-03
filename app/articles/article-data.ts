@@ -428,6 +428,12 @@ export const articles: TrehabArticle[] = [
         ],
       },
     ],
+    sources: [
+      { label: "World Health Organization: Rehabilitation — goals, process and who may benefit", url: "https://www.who.int/news-room/questions-and-answers/item/rehabilitation" },
+      { label: "World Health Organization: Rehabilitation in health systems — guide for action", url: "https://www.who.int/publications/i/item/9789241515986" },
+      { label: "Cieza et al. (2021): Global estimates of the need for rehabilitation", url: "https://pubmed.ncbi.nlm.nih.gov/33275908/" },
+      { label: "JOSPT Clinical Practice Guideline (2021): Interventions for lateral ankle sprains", url: "https://doi.org/10.2519/jospt.2021.0302" },
+    ],
   },
   {
     slug: "office-syndrome-warning-signs",
@@ -460,6 +466,12 @@ export const articles: TrehabArticle[] = [
       { heading: "กายภาพบำบัดช่วยออฟฟิศซินโดรมอย่างไร?", paragraphs: ["เป้าหมายของกายภาพบำบัดไม่ได้มีเพียงช่วยให้อาการปวดลดลง แต่คือการช่วยให้กลับไปทำงาน เคลื่อนไหว และใช้ชีวิตประจำวันได้ดีขึ้น"], bullets: ["การตรวจประเมินอาการ ช่วงการเคลื่อนไหว ความแข็งแรง และรูปแบบการเคลื่อนไหว", "Manual Therapy ตามผลการตรวจและข้อบ่งชี้", "Therapeutic Exercise เฉพาะบุคคล", "คำแนะนำด้านพฤติกรรมและ Ergonomics ให้เหมาะกับลักษณะงาน", "ติดตามความก้าวหน้าและปรับโปรแกรมไปพร้อมกับความสามารถของร่างกาย"] },
       { heading: "เมื่อไหร่ควรพบนักกายภาพบำบัดหรือรับการประเมินทางการแพทย์?", paragraphs: ["หากปวดคอ บ่า ไหล่ หรือหลังซ้ำ ๆ อาการรบกวนการทำงาน เคลื่อนไหวลำบาก หรือออกกำลังกายและปรับพฤติกรรมแล้วอาการยังไม่ดีขึ้น ควรเข้ารับการประเมินเพื่อค้นหาปัจจัยที่เกี่ยวข้องและวางแผนการดูแลให้เหมาะกับแต่ละบุคคล", "หากแขนหรือขาอ่อนแรงเฉียบพลัน ชาหรือสูญเสียความรู้สึกรุนแรง เดินเซผิดปกติ เจ็บหน้าอก หายใจลำบาก มีไข้ร่วมกับอาการปวดรุนแรง หรืออาการผิดปกติเกิดขึ้นเฉียบพลัน ควรเข้ารับการประเมินทางการแพทย์โดยเร็ว"] },
       { heading: "ปวดคอ บ่า ไหล่จากการทำงาน? ให้เราเริ่มจากการประเมิน", paragraphs: ["TREHAB Physiotherapy Clinic เชียงราย เน้นการตรวจประเมินก่อนการรักษา พร้อมวางแผนฟื้นฟูเฉพาะบุคคล โดยผสาน Manual Therapy, Therapeutic Exercise และ Movement Training เพื่อช่วยให้กลับไปทำงานและเคลื่อนไหวได้อย่างมั่นใจมากขึ้น", "โทร 092-939-0919 บริการกายภาพบำบัดออฟฟิศซินโดรม ปวดคอ บ่า ไหล่ ปวดหลัง Exercise Rehabilitation, Manual Therapy และโปรแกรมออกกำลังกายเฉพาะบุคคล"] },
+    ],
+    sources: [
+      { label: "Louw et al. (2023): Exercise interventions for preventing neck pain — systematic review and meta-analysis", url: "https://pubmed.ncbi.nlm.nih.gov/37683100/" },
+      { label: "Chen et al. (2018): Workplace-based interventions for neck pain in office workers — systematic review", url: "https://pubmed.ncbi.nlm.nih.gov/29088401/" },
+      { label: "Sihawong et al. (2014): Exercise programme for preventing neck pain among office workers — randomized trial", url: "https://pubmed.ncbi.nlm.nih.gov/24142988/" },
+      { label: "Tunwattanapong et al. (2016): Neck and shoulder stretching in office workers — randomized trial", url: "https://pubmed.ncbi.nlm.nih.gov/25780258/" },
     ],
   },
   {
