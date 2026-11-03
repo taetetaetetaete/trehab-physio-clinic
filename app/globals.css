@@ -118,3 +118,29 @@
 .trehab-exercise-guide{padding-top:78px}.trehab-exercise-guide>h2{max-width:760px;margin:8px 0 30px;color:#164d78;font-size:clamp(30px,4vw,48px);line-height:1.3}.trehab-exercise-guide-image{position:relative;overflow:hidden;height:520px;border-radius:3px 64px 3px 3px;background:#e4f3f8}.trehab-exercise-guide-image img{object-fit:cover}.trehab-exercise-guide ol{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0 0;padding:0;list-style:none}.trehab-exercise-guide li{display:flex;gap:16px;padding:22px;border:1px solid #d3e6ee;background:#fff}.trehab-exercise-guide li>span{flex:0 0 auto;color:#38a9ca;font-size:12px;font-weight:800;letter-spacing:.08em}.trehab-exercise-guide h3{margin:0 0 8px;color:#164d78;font-size:17px}.trehab-exercise-guide li p{margin:0;color:#58758b;font-size:13px;line-height:1.75}.trehab-exercise-guide-note{margin:16px 0 0;padding:16px 18px;border-left:4px solid #43b5d4;background:#f0faff;color:#56748b;font-size:13px;line-height:1.75}
 @media(max-width:900px){.trehab-exercise-guide-image{height:440px}.trehab-exercise-guide ol{grid-template-columns:1fr}}
 @media(max-width:640px){.trehab-exercise-guide{padding-top:55px}.trehab-exercise-guide>h2{font-size:30px}.trehab-exercise-guide-image{height:230px;border-radius:3px 36px 3px 3px}.trehab-exercise-guide li{padding:18px}}
+
+/* TREHAB health-magazine article treatment */
+.trehab-magazine-opener{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(260px,.55fr);gap:70px;align-items:end;padding-top:76px;padding-bottom:72px;border-bottom:1px solid #d8e9ef}
+.trehab-magazine-opener>div>span,.trehab-magazine-ending>span,.trehab-research-interlude>span{display:block;margin-bottom:15px;color:#1591ba;font-size:10px;font-weight:900;letter-spacing:.18em}
+.trehab-magazine-opener>div>p{margin:0;color:#164d78;font-size:clamp(23px,2.5vw,34px);font-weight:600;line-height:1.65;letter-spacing:-.015em}
+.trehab-magazine-opener blockquote{margin:0;padding:8px 0 8px 28px;border-left:3px solid #43b5d4;color:#6b879a;font-family:Georgia,"Times New Roman",serif;font-size:17px;font-style:italic;line-height:1.75}
+.trehab-magazine-aside-note{margin-bottom:28px}
+.trehab-magazine-toc{padding-top:24px;border-top:1px solid #cfe5ed}
+.trehab-magazine-toc ol{display:grid;gap:0;margin:0;padding:0;list-style:none}
+.trehab-magazine-toc li{padding:0!important;border-bottom:1px solid #dcebf0}
+.trehab-magazine-toc a{display:grid;grid-template-columns:25px 1fr;gap:8px;padding:10px 0;color:#426780!important;font-size:11px!important;font-weight:700!important;line-height:1.5;text-decoration:none}
+.trehab-magazine-toc a:hover{color:#087db4!important}
+.trehab-magazine-toc a span{color:#43aeca;font-size:9px;letter-spacing:.08em}
+.trehab-magazine-line-link{display:inline-block;margin-top:22px}
+.trehab-magazine-chapter{position:relative}
+.trehab-article-body .trehab-research-interlude{position:relative;top:auto;margin:-22px 0 58px 46px;padding:25px 28px 25px 31px;border:0;border-left:4px solid #42b0cf;background:linear-gradient(135deg,#eefaff,#f9fdff);box-shadow:none}
+.trehab-article-body .trehab-research-interlude:before{content:"“";position:absolute;right:20px;top:6px;color:rgba(22,143,197,.12);font-family:Georgia,serif;font-size:78px;line-height:1}
+.trehab-article-body .trehab-research-interlude>span{margin-bottom:9px}
+.trehab-article-body .trehab-research-interlude>p{position:relative;margin:0 0 10px;color:#668397;font-size:13px;line-height:1.75}
+.trehab-article-body .trehab-research-interlude>a{position:relative;display:block;color:#0759a2;font-size:13px;font-weight:800;line-height:1.65;text-decoration-thickness:1px;text-underline-offset:4px}
+.trehab-article-body .trehab-magazine-ending{margin:68px 0 62px;padding:38px 42px;border-top:1px solid #bbdfe9;border-bottom:1px solid #bbdfe9;background:linear-gradient(135deg,#fff,#f1fbfe)}
+.trehab-article-body .trehab-magazine-ending h2{margin:5px 0 17px;color:#0a426f;font-family:Georgia,"Times New Roman",serif;font-size:36px;font-weight:500}
+.trehab-article-body .trehab-magazine-ending p{margin:0;color:#3f647d;font-size:18px;line-height:1.9}
+.trehab-article-body .trehab-magazine-ending p:first-letter{float:left;margin:11px 9px 0 0;color:#087db4;font-family:inherit;font-size:58px;font-weight:800;line-height:.72}
+@media(max-width:900px){.trehab-magazine-opener{grid-template-columns:1fr;gap:30px;padding-top:58px;padding-bottom:55px}.trehab-magazine-toc ol{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 20px}.trehab-article-body .trehab-research-interlude{margin-left:28px}}
+@media(max-width:640px){.trehab-magazine-opener{gap:24px;padding-top:42px;padding-bottom:42px}.trehab-magazine-opener>div>p{font-size:21px;line-height:1.7}.trehab-magazine-opener blockquote{padding-left:19px;font-size:15px}.trehab-magazine-toc ol{grid-template-columns:1fr}.trehab-article-body .trehab-research-interlude{margin:-18px 0 48px 0;padding:21px 20px 21px 23px}.trehab-article-body .trehab-magazine-ending{margin:52px 0;padding:29px 23px}.trehab-article-body .trehab-magazine-ending h2{font-size:29px}.trehab-article-body .trehab-magazine-ending p{font-size:16px}}
