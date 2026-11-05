@@ -144,3 +144,66 @@
 .trehab-article-body .trehab-magazine-ending p:first-letter{float:left;margin:11px 9px 0 0;color:#087db4;font-family:inherit;font-size:58px;font-weight:800;line-height:.72}
 @media(max-width:900px){.trehab-magazine-opener{grid-template-columns:1fr;gap:30px;padding-top:58px;padding-bottom:55px}.trehab-magazine-toc ol{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 20px}.trehab-article-body .trehab-research-interlude{margin-left:28px}}
 @media(max-width:640px){.trehab-magazine-opener{gap:24px;padding-top:42px;padding-bottom:42px}.trehab-magazine-opener>div>p{font-size:21px;line-height:1.7}.trehab-magazine-opener blockquote{padding-left:19px;font-size:15px}.trehab-magazine-toc ol{grid-template-columns:1fr}.trehab-article-body .trehab-research-interlude{margin:-18px 0 48px 0;padding:21px 20px 21px 23px}.trehab-article-body .trehab-magazine-ending{margin:52px 0;padding:29px 23px}.trehab-article-body .trehab-magazine-ending h2{font-size:29px}.trehab-article-body .trehab-magazine-ending p{font-size:16px}}
+
+/* Global language and appearance controls */
+.trehab-site-preferences{position:fixed;z-index:1000;right:18px;top:112px;display:grid;grid-template-columns:auto auto;align-items:center;gap:7px;padding:8px;border:1px solid rgba(120,178,205,.45);border-radius:16px;background:rgba(255,255,255,.9);box-shadow:0 12px 34px rgba(3,39,76,.16);backdrop-filter:blur(16px)}
+.trehab-site-preferences small{grid-column:1/-1;padding:0 5px;color:#6d8ca0;font-size:7px;font-weight:800;letter-spacing:.14em;text-align:right}
+.trehab-language-control{display:flex;align-items:center;gap:7px;padding:0 6px}
+.trehab-language-control>span{color:#56758b;font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.trehab-language-control select{min-width:78px;height:34px;border:0;border-radius:9px;outline:0;background:#eaf7fb;color:#0a4d7e;font:700 12px/1 "Noto Sans Thai","Leelawadee UI",Tahoma,sans-serif;cursor:pointer}
+.trehab-language-control select:focus-visible,.trehab-theme-toggle:focus-visible{outline:3px solid rgba(49,170,211,.38);outline-offset:2px}
+.trehab-theme-toggle{height:34px;display:flex;align-items:center;gap:6px;padding:0 11px;border:0;border-radius:9px;background:#073d78;color:#fff;cursor:pointer;font-family:inherit}
+.trehab-theme-toggle span{font-size:15px;line-height:1}.trehab-theme-toggle b{font-size:9px;letter-spacing:.05em}
+@media(max-width:640px){.trehab-site-preferences{right:10px;top:92px;padding:6px;border-radius:13px}.trehab-language-control>span,.trehab-site-preferences small,.trehab-theme-toggle b{display:none}.trehab-language-control{padding:0}.trehab-language-control select{width:76px;height:32px}.trehab-theme-toggle{width:34px;height:32px;justify-content:center;padding:0}}
+
+/* Native TREHAB dark mode */
+html[data-theme="dark"]{color-scheme:dark;--ink:#dcecf7;--deep:#e7f6ff;--blue:#4bbfe8;--sky:#77def4}
+html[data-theme="dark"] body{background:#07131f;color:#dcecf7}
+html[data-theme="dark"] .trehab-site-preferences{border-color:#24465c;background:rgba(7,23,36,.92);box-shadow:0 12px 38px rgba(0,0,0,.35)}
+html[data-theme="dark"] .trehab-language-control>span,html[data-theme="dark"] .trehab-site-preferences small{color:#87a8ba}
+html[data-theme="dark"] .trehab-language-control select{background:#102d40;color:#e5f5ff}
+html[data-theme="dark"] .trehab-theme-toggle{background:#73d6ed;color:#062236}
+html[data-theme="dark"] .nav,html[data-theme="dark"] .trehab-policy-nav{border-color:#294a60;background:rgba(6,23,36,.94);box-shadow:0 14px 42px rgba(0,0,0,.28)}
+html[data-theme="dark"] .brand img,html[data-theme="dark"] .trehab-policy-logo img{filter:brightness(0) invert(1)}
+html[data-theme="dark"] .nav-links a,html[data-theme="dark"] .location,html[data-theme="dark"] .trehab-article-nav a{color:#c7e5f4}
+html[data-theme="dark"] .hero{background:#071b2b}
+html[data-theme="dark"] .hero:before{background:linear-gradient(90deg,rgba(4,16,26,.96) 0%,rgba(4,18,30,.83) 39%,rgba(4,20,33,.46) 62%,rgba(4,20,33,.12) 82%)}
+html[data-theme="dark"] .hero h1{color:#f2fbff;text-shadow:0 2px 18px rgba(0,0,0,.55)}
+html[data-theme="dark"] .hero h1 span,html[data-theme="dark"] .eyebrow{color:#75def2}
+html[data-theme="dark"] .hero-note,html[data-theme="dark"] .trehab-hero-subcopy{color:#c6dfea}
+html[data-theme="dark"] .manual,html[data-theme="dark"] .about{background:#07131f}
+html[data-theme="dark"] .manual-content h2,html[data-theme="dark"] .about-content h2,html[data-theme="dark"] .reviews-heading h2,html[data-theme="dark"] .trehab-enhance-heading h2,html[data-theme="dark"] .process-heading h2{color:#e7f6ff}
+html[data-theme="dark"] .description,html[data-theme="dark"] .about-description,html[data-theme="dark"] .trehab-enhance-heading>p,html[data-theme="dark"] .process-heading>p:last-child{color:#a8c2d1}
+html[data-theme="dark"] .tags span{border-color:#31566c;background:#0d2638;color:#8edcf0}
+html[data-theme="dark"] .care-grid,html[data-theme="dark"] .care-grid article,html[data-theme="dark"] .about-list{border-color:#29485b}
+html[data-theme="dark"] .care-grid article,html[data-theme="dark"] .t-card,html[data-theme="dark"] .flow>div,html[data-theme="dark"] .trehab-condition-grid article,html[data-theme="dark"] .trehab-care-grid article,html[data-theme="dark"] .trehab-faq-list details{border-color:#29485b;background:#0b2131;box-shadow:none}
+html[data-theme="dark"] .care-grid article p,html[data-theme="dark"] .t-card h3,html[data-theme="dark"] .flow b,html[data-theme="dark"] .about-list p,html[data-theme="dark"] .trehab-condition-grid h3,html[data-theme="dark"] .trehab-care-grid h3,html[data-theme="dark"] .trehab-faq-list summary{color:#d8edf7}
+html[data-theme="dark"] .t-card li,html[data-theme="dark"] .trehab-faq-list details>p{color:#9fbdcd;border-color:#29485b}
+html[data-theme="dark"] .trehab-process,html[data-theme="dark"] .trehab-conditions,html[data-theme="dark"] .trehab-faq{background:#091827}
+html[data-theme="dark"] .trehab-care-path,html[data-theme="dark"] .reviews{background:#07131f}
+html[data-theme="dark"] .trehab-trust-bar{border-color:#29485b;background:#091b2a}
+html[data-theme="dark"] .trehab-trust-bar>div>div{border-color:#29485b}
+html[data-theme="dark"] .trehab-trust-bar p{color:#c5dfea}
+html[data-theme="dark"] .therapist-card,html[data-theme="dark"] .review-card,html[data-theme="dark"] .trehab-google-reviews{border-color:#29485b;background:#0b2131;color:#d8edf7}
+html[data-theme="dark"] .therapist-title h3,html[data-theme="dark"] .review-top b,html[data-theme="dark"] .trehab-google-reviews h3{color:#e0f3fc}
+html[data-theme="dark"] .schedule b,html[data-theme="dark"] .review-card blockquote,html[data-theme="dark"] .trehab-google-reviews>div>p:last-child{color:#a8c4d3}
+html[data-theme="dark"] .trehab-articles-page,html[data-theme="dark"] .trehab-article-detail{background:#07131f}
+html[data-theme="dark"] .trehab-articles-hero,html[data-theme="dark"] .trehab-article-detail-header{background:linear-gradient(135deg,#091d2d,#0b2537 58%,#0b3044)}
+html[data-theme="dark"] .trehab-articles-list{background:#07131f}
+html[data-theme="dark"] .trehab-articles-hero h1,html[data-theme="dark"] .trehab-articles-heading h2,html[data-theme="dark"] .trehab-article-detail-header h1,html[data-theme="dark"] .trehab-magazine-opener>div>p{color:#e7f6ff}
+html[data-theme="dark"] .trehab-articles-hero>div>p:last-child,html[data-theme="dark"] .trehab-articles-heading>p,html[data-theme="dark"] .trehab-article-lead,html[data-theme="dark"] .trehab-magazine-opener blockquote{color:#a9c3d2}
+html[data-theme="dark"] .trehab-article-card,html[data-theme="dark"] .trehab-article-card-featured,html[data-theme="dark"] .trehab-related-articles article,html[data-theme="dark"] .trehab-exercise-guide li{border-color:#29485b;background:#0b2131}
+html[data-theme="dark"] .trehab-article-card h3 a,html[data-theme="dark"] .trehab-related-articles strong,html[data-theme="dark"] .trehab-exercise-guide h3{color:#dceff8}
+html[data-theme="dark"] .trehab-article-card-content>p:not(.trehab-article-category),html[data-theme="dark"] .trehab-article-body section p,html[data-theme="dark"] .trehab-article-body li,html[data-theme="dark"] .trehab-article-warning p{color:#a9c3d2}
+html[data-theme="dark"] .trehab-magazine-opener{border-color:#29485b}
+html[data-theme="dark"] .trehab-article-body>aside,html[data-theme="dark"] .trehab-article-body .trehab-research-interlude,html[data-theme="dark"] .trehab-article-sources,html[data-theme="dark"] .trehab-article-warning{border-color:#3386a4;background:#0c2637}
+html[data-theme="dark"] .trehab-article-body h2,html[data-theme="dark"] .trehab-article-body .trehab-magazine-ending h2,html[data-theme="dark"] .trehab-exercise-guide>h2{color:#dceff8}
+html[data-theme="dark"] .trehab-article-body .trehab-magazine-ending{border-color:#31566c;background:linear-gradient(135deg,#0b2131,#0b2b3d)}
+html[data-theme="dark"] .trehab-article-body .trehab-magazine-ending p{color:#bad2de}
+html[data-theme="dark"] .trehab-privacy-policy{background:#07131f}
+html[data-theme="dark"] .trehab-privacy-header,html[data-theme="dark"] .trehab-privacy-article,html[data-theme="dark"] .trehab-privacy-contact address{border-color:#29485b;background:#0b2131;box-shadow:none}
+html[data-theme="dark"] .trehab-privacy-header h2,html[data-theme="dark"] .trehab-privacy-article h3{color:#e1f3fb}
+html[data-theme="dark"] .trehab-privacy-header>p:not(.section-kicker),html[data-theme="dark"] .trehab-privacy-article p,html[data-theme="dark"] .trehab-privacy-article li,html[data-theme="dark"] .trehab-privacy-contact address{color:#a9c3d2}
+html[data-theme="dark"] .floating-actions a{border-color:#29485b;background:#0b2131;color:#8cdcf0}
+html[data-theme="dark"] .footer-brand>a{background:#fff}
+@media(max-width:1000px){html[data-theme="dark"] .hero:before{background:linear-gradient(180deg,rgba(4,16,26,.97) 0%,rgba(4,18,30,.86) 45%,rgba(4,20,33,.36) 72%,rgba(4,20,33,.08) 100%)}}

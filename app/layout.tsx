@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import SitePreferences from "./site-preferences";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.trehabphysio.com"),
@@ -17,8 +18,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="th">
-      <body><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(localBusinessData)}}/>{children}</body>
+    <html lang="th" suppressHydrationWarning>
+      <body><script dangerouslySetInnerHTML={{__html:`try{var t=localStorage.getItem('trehab-theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t}catch(e){}`}}/><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(localBusinessData)}}/><SitePreferences/>{children}</body>
     </html>
   );
 }
