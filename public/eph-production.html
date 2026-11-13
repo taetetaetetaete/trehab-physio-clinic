@@ -654,10 +654,9 @@ button:disabled{cursor:not-allowed;opacity:.55}
     element.textContent=message;
     element.classList.toggle('show',Boolean(message));
   }
-  function staffRequest(path,{method='GET',token,body,prefer}={}){
+  function staffRequest(path,{method='GET',token,body}={}){
     const headers={...staffAuthHeaders};
     if(token)headers.Authorization='Bearer '+token;
-    if(prefer)headers.Prefer=prefer;
     return fetch(staffAuthBase+path,{method,headers,body:body===undefined?undefined:JSON.stringify(body)});
   }
   async function closeStaffSession(token,scope='local'){
@@ -920,7 +919,7 @@ button:disabled{cursor:not-allowed;opacity:.55}
       }
       if(!body.phone)delete body.phone;
       try{
-        const response=await staffRequest('/rest/v1/patients?select=hn',{method:'POST',token:staffToken,body,prefer:'return=representation'});
+        const response=await staffRequest('/rest/v1/rpc/register_patient',{method:'POST',token:staffToken,body});
         if(response.ok){
           const [patient]=await response.json().catch(()=>[]);
           go('patients/register');
