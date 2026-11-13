@@ -658,6 +658,10 @@ button:disabled{cursor:not-allowed;opacity:.55}
   const loginPassword=document.getElementById('loginPassword');
   let staffToken=null;
   let signedInStaff=null;
+  let staffExpiresAt=0;
+  let staffExpiryTimer;
+  const staffSessionKey='trehab.eph.staff-session.v1';
+  const staffSessionLimit=60*60*1000;
   function activeStaff(){return signedInStaff}
   function showApp(){renderRoute();loginPage.style.display='none';appShell.style.display='grid';document.body.style.background='var(--bg)'}
   function showLogin(){appShell.style.display='none';loginPage.style.display='grid';loginError.classList.remove('show');document.getElementById('loginPassword').value='';document.getElementById('loginEmail').focus()}
@@ -674,6 +678,49 @@ button:disabled{cursor:not-allowed;opacity:.55}
   async function closeStaffSession(token,scope='local'){
     if(token)await staffRequest('/auth/v1/logout?scope='+scope,{method:'POST',token}).catch(()=>{});
   }
+  async function fetchStaffProfile(userId,token){
+    const response=await staffRequest('/rest/v1/staff?select=id,name,role,license_no,must_change_password&active=eq.true&id=eq.'+encodeURIComponent(userId),{token});
+    if(!response.ok)throw new Error('Staff profile unavailable');
+    const [profile]=await response.json();
+    return profile;
+  }
+  function checkStaffExpiry(){
+    if(!staffExpiresAt||Date.now()<staffExpiresAt)return;
+    logout();
+    showStaffMessage(loginError,'ครบเวลาเข้าสู่ระบบแล้ว กรุณาเข้าสู่ระบบอีกครั้ง');
+  }
+  function openStaffSession(token,user,profile,expiresAt){
+    staffToken=token;
+    staffExpiresAt=expiresAt;
+    signedInStaff={...profile,email:user.email,license:profile.license_no};
+    try{sessionStorage.setItem(staffSessionKey,JSON.stringify({token,expiresAt}))}catch{}
+    clearTimeout(staffExpiryTimer);
+    staffExpiryTimer=setTimeout(checkStaffExpiry,Math.max(0,expiresAt-Date.now()));
+    showApp();
+  }
+  async function restoreStaffSession(){
+    let saved;
+    try{saved=JSON.parse(sessionStorage.getItem(staffSessionKey))}catch{}
+    if(!saved?.token||!Number.isFinite(saved.expiresAt))return;
+    const button=loginForm.querySelector('[type=submit]');
+    button.disabled=true;
+    try{
+      if(saved.expiresAt<=Date.now())throw new Error('Expired session');
+      const result=await staffRequest('/auth/v1/user',{token:saved.token});
+      if(!result.ok)throw new Error('Invalid session');
+      const user=await result.json();
+      const profile=await fetchStaffProfile(user.id,saved.token);
+      if(!profile||profile.must_change_password||saved.expiresAt<=Date.now())throw new Error('Invalid staff session');
+      openStaffSession(saved.token,user,profile,saved.expiresAt);
+    }catch{
+      logout();
+      showStaffMessage(loginError,'กรุณาเข้าสู่ระบบอีกครั้ง');
+    }finally{
+      button.disabled=false;
+    }
+  }
+  document.addEventListener('visibilitychange',checkStaffExpiry);
+  window.addEventListener('pageshow',checkStaffExpiry);
   try{sessionStorage.removeItem('trehabAuth');localStorage.removeItem('trehabRemember')}catch{}
   showLogin();
   loginForm.addEventListener('submit',async event=>{
@@ -692,9 +739,7 @@ button:disabled{cursor:not-allowed;opacity:.55}
       const session=await response.json();
       token=session.access_token;
       if(!token||!session.user?.id)throw new Error('Invalid session');
-      const result=await staffRequest('/rest/v1/staff?select=id,name,role,license_no,must_change_password&active=eq.true&id=eq.'+encodeURIComponent(session.user.id),{token});
-      if(!result.ok)throw new Error('Staff profile unavailable');
-      const [profile]=await result.json();
+      const profile=await fetchStaffProfile(session.user.id,token);
       if(!profile){
         showStaffMessage(loginError,'บัญชีนี้ไม่มีสิทธิ์เข้าใช้งาน TREHAB EPH');
         return;
@@ -708,8 +753,9 @@ button:disabled{cursor:not-allowed;opacity:.55}
         document.getElementById('staffNewPassword').focus();
         return;
       }
-      signedInStaff={...profile,email,license:profile.license_no};
-      showApp();
+      const expiresAt=Math.min(Date.now()+staffSessionLimit,Number(session.expires_at)*1000);
+      if(!Number.isFinite(expiresAt)||expiresAt<=Date.now()){logout();throw new Error('Invalid session expiry')}
+      openStaffSession(staffToken,session.user,profile,expiresAt);
     }catch{
       showStaffMessage(loginError,'เชื่อมต่อระบบเข้าสู่ระบบไม่ได้ กรุณาลองใหม่');
     }finally{
@@ -758,6 +804,9 @@ button:disabled{cursor:not-allowed;opacity:.55}
     const token=staffToken;
     staffToken=null;
     signedInStaff=null;
+    staffExpiresAt=0;
+    clearTimeout(staffExpiryTimer);
+    try{sessionStorage.removeItem(staffSessionKey)}catch{}
     staffPasswordForm.reset();
     staffPasswordForm.hidden=true;
     loginForm.hidden=false;
@@ -1088,4 +1137,5 @@ button:disabled{cursor:not-allowed;opacity:.55}
       if(/^trehab\..*demo(?:[.|-]|$)/.test(key))localStorage.removeItem(key);
     }
   }catch{}
+  void restoreStaffSession();
 </script></body></html>
