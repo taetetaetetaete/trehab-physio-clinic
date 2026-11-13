@@ -962,6 +962,71 @@ button:disabled{cursor:not-allowed;opacity:.55}
     event.preventDefault();
     go(link.pathname.slice(basePath.length+1));
   });
+  function renderStaffSettings(root,staff){
+    const tabs=[['accounts','บัญชีผู้ใช้งาน'],['roles','บทบาทและสิทธิ์'],['clinic','ตั้งค่าคลินิก'],['audit','ประวัติการแก้ไข']];
+    const toolbar=document.createElement('div');
+    toolbar.className='actions';
+    const body=document.createElement('div');
+    body.style.marginTop='16px';
+    const roleNames={admin:'ผู้ดูแลระบบ',physiotherapist:'นักกายภาพบำบัด',finance:'เจ้าหน้าที่การเงิน',reception:'เจ้าหน้าที่ต้อนรับ'};
+    function table(headers,rows){
+      const wrap=document.createElement('div');
+      wrap.className='table-wrap';
+      const grid=document.createElement('table');
+      grid.className='table';
+      const head=grid.createTHead().insertRow();
+      for(const title of headers){const cell=node('th',title);cell.scope='col';head.append(cell)}
+      const list=grid.createTBody();
+      for(const row of rows){const tr=list.insertRow();for(const value of row)tr.insertCell().textContent=value}
+      wrap.append(grid);
+      return wrap;
+    }
+    function render(tab){
+      for(const button of toolbar.children){
+        const active=button.dataset.adminTab===tab;
+        button.classList.toggle('primary',active);
+        button.setAttribute('aria-pressed',String(active));
+      }
+      body.replaceChildren();
+      if(tab==='accounts'){
+        body.append(node('h2','บัญชีผู้ใช้งาน'),node('p','แสดงบัญชีที่กำลังเข้าสู่ระบบ'),table(
+          ['ชื่อ','อีเมล','บทบาท','สถานะ'],
+          [[staff.name||'—',staff.email,roleNames[staff.role]||staff.role,'ใช้งาน']]
+        ));
+      }else if(tab==='roles'){
+        body.append(node('h2','บทบาทและสิทธิ์'),table(
+          ['บทบาท','สิทธิ์อ่านและเพิ่มทะเบียนผู้ป่วย'],
+          Object.entries(roleNames).map(([role,label])=>[label,role==='finance'?'—':'อ่านและเพิ่มข้อมูล'])
+        ));
+      }else if(tab==='clinic'){
+        body.append(node('h2','ข้อมูลคลินิก'));
+        const fields=document.createElement('div');
+        fields.className='form-grid';
+        for(const [title,value] of [['ชื่อคลินิก','TREHAB Physiotherapy Clinic'],['สาขา','เชียงราย'],['ที่ตั้งและสถานที่ติดต่อ',''],['เบอร์โทร','']]){
+          const label=node('label',title);
+          label.className='field';
+          const field=document.createElement('input');
+          field.value=value;
+          field.readOnly=true;
+          label.append(field);
+          fields.append(label);
+        }
+        body.append(fields,node('p','ยังไม่ได้เชื่อมการบันทึกการตั้งค่าคลินิก'));
+      }else{
+        body.append(node('h2','ประวัติการแก้ไข'),table(['เวลา (ไทย)','รายการ'],[]),node('p','ยังไม่ได้เชื่อมประวัติการแก้ไข'));
+      }
+    }
+    for(const [key,title] of tabs){
+      const button=node('button',title);
+      button.type='button';
+      button.className='btn';
+      button.dataset.adminTab=key;
+      button.onclick=()=>render(key);
+      toolbar.append(button);
+    }
+    root.append(toolbar,body);
+    render('accounts');
+  }
   function renderRoute(){
     const staff=activeStaff();
     if(!staff)return;
@@ -993,7 +1058,7 @@ button:disabled{cursor:not-allowed;opacity:.55}
     }else if(key==='patient-registration'){
       card.append(node('p','บัญชีนี้ไม่มีสิทธิ์เพิ่มผู้ป่วย'));
     }else if(key==='users'){
-      card.append(node('p',staff.name+' · '+staff.role));
+      renderStaffSettings(card,staff);
     }else if(key==='coding'&&!layout){
       card.append(node('p','รูปแบบ HN YYYY-XXXXX-UUUU'));
     }else if(key==='sitemap'&&!layout){
