@@ -364,16 +364,12 @@ button:disabled{cursor:not-allowed;opacity:.55}
           <div class="heading"><div><h1>ทะเบียนและการรักษา</h1><p>ค้นหาด้วยชื่อหรือนามสกุล แล้วเลือกผู้ป่วยก่อนเปิดเวชระเบียน</p></div><div class="actions"><a class="btn" href="/eph/patients/new" data-work-route>＋ ลงทะเบียนผู้ป่วยใหม่</a></div></div>
           <div class="card patient-search-card">
             <div class="card-title"><h2>ค้นหาผู้ป่วย</h2></div>
-            <form id="patientSearchForm" hidden="" data-eph-inactive="">
-              <div class="patient-search-actions"><div class="field"><label for="patientSearchQuery">ชื่อ–นามสกุล</label><input id="patientSearchQuery" type="search" maxlength="120" autocomplete="off" required></div><button type="submit" class="btn primary" disabled>ค้นหา</button><button type="reset" class="btn" disabled>ล้าง</button></div>
-            </form>
-            
-            <div class="patient-search-results" id="patientSearchResult" hidden></div>
+            <div data-module></div>
           </div>
-        <div data-module=""></div><button type="button" id="ephOpenRecord" class="btn" disabled>ดูโครงเวชระเบียน</button></div>
+        </div>
         <div id="patientRecord" hidden="">
         <div class="heading"><div><h1 id="patientRecordTitle" tabindex="-1">เวชระเบียนผู้ป่วย</h1><p>ดูข้อมูลส่วนตัว การ์ดการรักษา บันทึก Visit และ Timeline</p></div><div class="actions"><button class="btn" id="backPatientSearch" type="button" disabled>← กลับไปค้นหาผู้ป่วย</button></div></div>
-        <div class="card" style="margin-bottom:16px"><div class="patient-head"><div class="patient-avatar" aria-hidden="true">—</div><div><h2 style="margin:0"><span class="status gray">ยังไม่ได้เลือกผู้ป่วย</span></h2><span class="muted"><span id="patientEpisodeLabel"></span></span></div></div></div><nav class="card" aria-label="ขั้นตอนการรับบริการ" style="margin-bottom:16px"><strong>ขั้นตอนการรับบริการ</strong><div id="patientTabs" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px"><button type="button" class="btn" data-eph-tab="profile">ข้อมูลส่วนตัว</button><button type="button" class="btn" data-eph-tab="episodes">การ์ดการรักษา</button><button type="button" class="btn" data-eph-tab="clinical">บันทึก Visit</button><button type="button" class="btn" data-eph-tab="payment">การชำระเงิน</button><button type="button" class="btn" data-eph-tab="timeline">ติดตามผล</button></div><div class="actions"><button type="button" class="btn" data-eph-modal="priorVisitModal">ดึง Visit ก่อนหน้า</button><button type="button" class="btn" data-eph-modal="barthelModal">ประเมิน Barthel ADL</button><button type="button" class="btn" data-eph-modal="retroModal">บันทึกย้อนหลัง</button><button type="button" class="btn" data-eph-modal="progressModal">Progress Summary</button><button type="button" class="btn" data-eph-modal="dischargeModal">Discharge Summary</button></div><p id="patientFlowStatus" role="status" style="margin:8px 0 0"></p><div id="patientFlowActions" class="actions" style="margin-top:8px"></div></nav>
+        <div class="card" style="margin-bottom:16px"><div class="patient-head"><div class="patient-avatar" aria-hidden="true">—</div><div><h2 style="margin:0"><span id="ephSelectedPatient"></span></h2><span class="muted"><span id="patientEpisodeLabel"></span></span></div></div></div><nav class="card" aria-label="ขั้นตอนการรับบริการ" style="margin-bottom:16px"><strong>ขั้นตอนการรับบริการ</strong><div id="patientTabs" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px"><button type="button" class="btn" data-eph-tab="profile">ข้อมูลส่วนตัว</button><button type="button" class="btn" data-eph-tab="episodes">การ์ดการรักษา</button><button type="button" class="btn" data-eph-tab="clinical">บันทึก Visit</button><button type="button" class="btn" data-eph-tab="payment">การชำระเงิน</button><button type="button" class="btn" data-eph-tab="timeline">ติดตามผล</button></div><div class="actions"><button type="button" class="btn" data-eph-modal="priorVisitModal">ดึง Visit ก่อนหน้า</button><button type="button" class="btn" data-eph-modal="barthelModal">ประเมิน Barthel ADL</button><button type="button" class="btn" data-eph-modal="retroModal">บันทึกย้อนหลัง</button><button type="button" class="btn" data-eph-modal="progressModal">Progress Summary</button><button type="button" class="btn" data-eph-modal="dischargeModal">Discharge Summary</button></div><p id="patientFlowStatus" role="status" style="margin:8px 0 0"></p><div id="patientFlowActions" class="actions" style="margin-top:8px"></div></nav>
 
         <div class="patient-panel" data-panel="profile"><div class="clinical-layout"><div class="card"><div class="card-title"><h2>ข้อมูลประวัติส่วนตัว</h2><span>—</span></div><div class="form-section"><h3><span class="num">01</span>ข้อมูลระบุตัวบุคคล</h3><div class="form-grid"><div class="field"><label>เลขประจำตัวประชาชน</label><input></div><div class="field"><label>HN</label><input disabled></div><div class="field"><label>ชื่อ</label><input></div><div class="field"><label>นามสกุล</label><input></div><div class="field"><label>วันเดือนปีเกิด</label><input type="date"></div><div class="field"><label>เพศ</label><select><option>ชาย</option><option>หญิง</option><option>ไม่ระบุ</option></select></div><div class="field"><label>เบอร์โทรศัพท์</label><input></div><div class="field"><label>LINE / Email</label><input></div><div class="field full"><label>ที่อยู่</label><textarea></textarea></div></div></div><div class="form-section"><h3><span class="num">02</span>ข้อมูลติดต่อฉุกเฉินและสุขภาพ</h3><div class="form-grid"><div class="field"><label>ผู้ติดต่อฉุกเฉิน</label><input></div><div class="field"><label>เบอร์โทรฉุกเฉิน</label><input></div><div class="field"><label>อาชีพ</label><input></div><div class="field"><label>สิทธิการรักษา</label><select><option>ชำระเงินเอง</option><option>ประกันสุขภาพ</option><option>Package</option></select></div><div class="field full"><label for="profileMedicalHistory">โรคประจำตัวและประวัติสุขภาพ</label><textarea id="profileMedicalHistory"></textarea></div><div class="field full"><label for="opdAllergy">ประวัติการแพ้ยา</label><textarea id="opdAllergy" placeholder="ชื่อยา อาการแพ้ หรือระบุว่าไม่ทราบ"></textarea></div><div class="field full"><label for="opdLab">ผลตรวจทางห้องปฏิบัติการ / การตรวจเพิ่มเติม</label><textarea id="opdLab" placeholder="ผลตรวจ วันที่ และแหล่งข้อมูล (ถ้ามี)"></textarea></div></div></div><div class="savebar"><span class="muted">—</span><button class="btn primary" onclick="notify('บันทึกข้อมูลผู้ป่วยเรียบร้อย')" disabled>บันทึกข้อมูลผู้ป่วย</button></div></div><aside><div class="card"><div class="card-title"><h2>ความครบถ้วนข้อมูล</h2><b style="color:var(--green)">—</b></div><div class="progress" style="background:#e9eef5"><i style="width:92%"></i></div></div></aside></div></div>
 
@@ -978,22 +974,100 @@ button:disabled{cursor:not-allowed;opacity:.55}
     }
     draw();
   }
-  function wireRecord(root,path){
-    const record=root.querySelector('#patientRecord'), lookup=root.querySelector('#patientLookup');
-    const show=tab=>{
-      lookup.hidden=false;record.hidden=false;
+  function wireRecord(root){
+    const record=root.querySelector('#patientRecord'),lookup=root.querySelector('#patientLookup');
+    function show(tab){
       for(const panel of record.querySelectorAll('[data-panel]'))panel.classList.toggle('active',panel.dataset.panel===tab);
       for(const button of record.querySelectorAll('[data-eph-tab]'))button.setAttribute('aria-pressed',String(button.dataset.ephTab===tab));
+    }
+    const back=root.querySelector('#backPatientSearch');
+    back.disabled=false;
+    back.onclick=()=>{
+      record.hidden=true;
+      lookup.hidden=false;
+      lookup.querySelector('input[type=search]').focus();
     };
-    root.querySelector('#ephOpenRecord').disabled=false;
-    root.querySelector('#ephOpenRecord').onclick=()=>show('profile');
-    root.querySelector('#backPatientSearch').disabled=false;
-    root.querySelector('#backPatientSearch').onclick=()=>{record.hidden=true};
     for(const button of record.querySelectorAll('[data-eph-tab]'))button.onclick=()=>show(button.dataset.ephTab);
     const open=root.querySelector('#openEpisode');
-    if(open){open.disabled=false;open.onclick=()=>{root.querySelector('#episodeForm').hidden=false}}
-    const tab=path.split('/')[1];
-    if(['profile','episodes','clinical','payment','timeline'].includes(tab))show(tab);
+    if(open){open.disabled=false;open.onclick=()=>{root.querySelector('#episodeForm').hidden=false}};
+    return patient=>{
+      record.querySelector('#ephSelectedPatient').textContent=[patient.first_name,patient.last_name].filter(Boolean).join(' ');
+      record.querySelector('#patientEpisodeLabel').textContent='HN '+patient.hn;
+      lookup.hidden=true;
+      record.hidden=false;
+      show('profile');
+      record.querySelector('#patientRecordTitle').focus();
+    };
+  }
+  function searchPatientRecords(root,selectPatient){
+    const form=document.createElement('form');
+    form.className='patient-search-actions';
+    const field=node('label','HN หรือชื่อ–นามสกุล');
+    field.className='field';
+    const input=document.createElement('input');
+    input.type='search';
+    input.maxLength=120;
+    input.required=true;
+    input.placeholder='กรอก HN ชื่อ หรือนามสกุล';
+    field.append(input);
+    const submit=node('button','ค้นหา');
+    submit.type='submit';
+    submit.className='btn primary';
+    const reset=node('button','ล้าง');
+    reset.type='reset';
+    reset.className='btn';
+    form.append(field,submit,reset);
+    const status=node('p','');
+    status.setAttribute('role','status');
+    const results=document.createElement('div');
+    results.className='table-wrap';
+    root.append(form,status,results);
+    let requestNumber=0;
+    form.onreset=()=>{
+      requestNumber++;
+      submit.disabled=false;
+      results.replaceChildren();
+      status.textContent='';
+    };
+    form.onsubmit=async event=>{
+      event.preventDefault();
+      const term=input.value.trim();
+      if(!term){status.textContent='กรุณากรอกคำค้น';return}
+      const current=++requestNumber,token=staffToken;
+      const isCurrent=()=>current===requestNumber&&root.isConnected&&token===staffToken;
+      submit.disabled=true;
+      results.replaceChildren();
+      status.textContent='กำลังค้นหา…';
+      try{
+        const response=await staffRequest('/rest/v1/rpc/search_patient_registry',{method:'POST',token,body:{search_term:term}});
+        if(!response.ok)throw Error('Patient search unavailable');
+        const patients=await response.json();
+        if(!isCurrent())return;
+        status.textContent=patients.length?(patients.length===100?'แสดง 100 รายการแรก กรุณาระบุคำค้นให้เจาะจงขึ้น':'พบ '+patients.length+' รายการ'):'ไม่พบผู้ป่วยที่ตรงกับคำค้น';
+        if(!patients.length)return;
+        const table=document.createElement('table');
+        table.className='table';
+        const header=table.createTHead().insertRow();
+        for(const title of ['HN','ชื่อ–นามสกุล','เวชระเบียน']){
+          const cell=node('th',title);cell.scope='col';header.append(cell);
+        }
+        const body=table.createTBody();
+        for(const patient of patients){
+          const row=body.insertRow();
+          row.insertCell().textContent=patient.hn;
+          row.insertCell().textContent=[patient.first_name,patient.last_name].filter(Boolean).join(' ');
+          const button=node('button','เปิดเวชระเบียน');
+          button.type='button';button.className='btn';
+          button.onclick=()=>selectPatient(patient);
+          row.insertCell().append(button);
+        }
+        results.append(table);
+      }catch{
+        if(isCurrent())status.textContent='ค้นหาไม่สำเร็จ กรุณาลองอีกครั้ง';
+      }finally{
+        if(isCurrent())submit.disabled=false;
+      }
+    };
   }
   document.addEventListener('submit',event=>{
     if(event.target.matches('[data-eph-inactive]'))event.preventDefault();
@@ -1112,9 +1186,10 @@ button:disabled{cursor:not-allowed;opacity:.55}
     if(!layout){card.className='card';page.append(card)}
     if(key==='appointments'){
       renderCalendar(page);
-    }else if(key==='patients'||key==='patient-register'){
+    }else if(key==='patients'){
+      searchPatientRecords(card,wireRecord(page));
+    }else if(key==='patient-register'){
       showPatients(card);
-      if(key==='patients')wireRecord(page,path);
     }else if(key==='patient-registration'&&['admin','physiotherapist','reception'].includes(staff.role)){
       registerPatient(card);
     }else if(key==='patient-registration'){
