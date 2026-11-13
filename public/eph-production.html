@@ -371,7 +371,7 @@ button:disabled{cursor:not-allowed;opacity:.55}
         <div class="heading"><div><h1 id="patientRecordTitle" tabindex="-1">เวชระเบียนผู้ป่วย</h1><p>ดูข้อมูลส่วนตัว การ์ดการรักษา บันทึก Visit และ Timeline</p></div><div class="actions"><button class="btn" id="backPatientSearch" type="button" disabled>← กลับไปค้นหาผู้ป่วย</button></div></div>
         <div class="card" style="margin-bottom:16px"><div class="patient-head"><div class="patient-avatar" aria-hidden="true">—</div><div><h2 style="margin:0"><span id="ephSelectedPatient"></span></h2><span class="muted"><span id="patientEpisodeLabel"></span></span></div></div></div><nav class="card" aria-label="ขั้นตอนการรับบริการ" style="margin-bottom:16px"><strong>ขั้นตอนการรับบริการ</strong><div id="patientTabs" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px"><button type="button" class="btn" data-eph-tab="profile">ข้อมูลส่วนตัว</button><button type="button" class="btn" data-eph-tab="episodes">การ์ดการรักษา</button><button type="button" class="btn" data-eph-tab="clinical">บันทึก Visit</button><button type="button" class="btn" data-eph-tab="payment">การชำระเงิน</button><button type="button" class="btn" data-eph-tab="timeline">ติดตามผล</button></div><div class="actions"><button type="button" class="btn" data-eph-modal="priorVisitModal">ดึง Visit ก่อนหน้า</button><button type="button" class="btn" data-eph-modal="barthelModal">ประเมิน Barthel ADL</button><button type="button" class="btn" data-eph-modal="retroModal">บันทึกย้อนหลัง</button><button type="button" class="btn" data-eph-modal="progressModal">Progress Summary</button><button type="button" class="btn" data-eph-modal="dischargeModal">Discharge Summary</button></div><p id="patientFlowStatus" role="status" style="margin:8px 0 0"></p><div id="patientFlowActions" class="actions" style="margin-top:8px"></div></nav>
 
-        <div class="patient-panel" data-panel="profile"><div class="clinical-layout"><div class="card"><div class="card-title"><h2>ข้อมูลประวัติส่วนตัว</h2><span>—</span></div><div class="form-section"><h3><span class="num">01</span>ข้อมูลระบุตัวบุคคล</h3><div class="form-grid"><div class="field"><label>เลขประจำตัวประชาชน</label><input></div><div class="field"><label>HN</label><input disabled></div><div class="field"><label>ชื่อ</label><input></div><div class="field"><label>นามสกุล</label><input></div><div class="field"><label>วันเดือนปีเกิด</label><input type="date"></div><div class="field"><label>เพศ</label><select><option>ชาย</option><option>หญิง</option><option>ไม่ระบุ</option></select></div><div class="field"><label>เบอร์โทรศัพท์</label><input></div><div class="field"><label>LINE / Email</label><input></div><div class="field full"><label>ที่อยู่</label><textarea></textarea></div></div></div><div class="form-section"><h3><span class="num">02</span>ข้อมูลติดต่อฉุกเฉินและสุขภาพ</h3><div class="form-grid"><div class="field"><label>ผู้ติดต่อฉุกเฉิน</label><input></div><div class="field"><label>เบอร์โทรฉุกเฉิน</label><input></div><div class="field"><label>อาชีพ</label><input></div><div class="field"><label>สิทธิการรักษา</label><select><option>ชำระเงินเอง</option><option>ประกันสุขภาพ</option><option>Package</option></select></div><div class="field full"><label for="profileMedicalHistory">โรคประจำตัวและประวัติสุขภาพ</label><textarea id="profileMedicalHistory"></textarea></div><div class="field full"><label for="opdAllergy">ประวัติการแพ้ยา</label><textarea id="opdAllergy" placeholder="ชื่อยา อาการแพ้ หรือระบุว่าไม่ทราบ"></textarea></div><div class="field full"><label for="opdLab">ผลตรวจทางห้องปฏิบัติการ / การตรวจเพิ่มเติม</label><textarea id="opdLab" placeholder="ผลตรวจ วันที่ และแหล่งข้อมูล (ถ้ามี)"></textarea></div></div></div><div class="savebar"><span class="muted">—</span><button class="btn primary" onclick="notify('บันทึกข้อมูลผู้ป่วยเรียบร้อย')" disabled>บันทึกข้อมูลผู้ป่วย</button></div></div><aside><div class="card"><div class="card-title"><h2>ความครบถ้วนข้อมูล</h2><b style="color:var(--green)">—</b></div><div class="progress" style="background:#e9eef5"><i style="width:92%"></i></div></div></aside></div></div>
+        <div class="patient-panel" data-panel="profile"><div class="clinical-layout"><form class="card" id="ephProfileForm"><div class="card-title"><h2>ข้อมูลประวัติส่วนตัว</h2><span>—</span></div><div class="form-section"><h3><span class="num">01</span>ข้อมูลระบุตัวบุคคล</h3><div class="form-grid"><div class="field"><label for="eph-profile-national_id">เลขประจำตัวประชาชน</label><input name="national_id" id="eph-profile-national_id" inputmode="numeric" maxlength="13" pattern="[0-9]{13}" autocomplete="off"></div><div class="field"><label for="eph-profile-hn">HN</label><input name="hn" id="eph-profile-hn" readonly autocomplete="off"></div><div class="field"><label for="eph-profile-first_name">ชื่อ</label><input name="first_name" id="eph-profile-first_name" required maxlength="120" autocomplete="off"></div><div class="field"><label for="eph-profile-last_name">นามสกุล</label><input name="last_name" id="eph-profile-last_name" required maxlength="120" autocomplete="off"></div><div class="field"><label for="eph-profile-birth_date">วันเดือนปีเกิด</label><input name="birth_date" id="eph-profile-birth_date" autocomplete="off" type="date"></div><div class="field"><label for="eph-profile-sex">เพศ</label><select name="sex" id="eph-profile-sex"><option value="">เลือกหรือเว้นว่าง</option><option>ชาย</option><option>หญิง</option><option>ไม่ระบุ</option></select></div><div class="field"><label for="eph-profile-phone">เบอร์โทรศัพท์</label><input name="phone" id="eph-profile-phone" type="tel" maxlength="32" autocomplete="off"></div><div class="field"><label for="eph-profile-contact_channel">LINE / Email</label><input name="contact_channel" id="eph-profile-contact_channel" autocomplete="off"></div><div class="field full"><label for="eph-profile-address">ที่อยู่</label><textarea name="address" id="eph-profile-address" autocomplete="off"></textarea></div></div></div><div class="form-section"><h3><span class="num">02</span>ข้อมูลติดต่อฉุกเฉินและสุขภาพ</h3><div class="form-grid"><div class="field"><label for="eph-profile-emergency_contact">ผู้ติดต่อฉุกเฉิน</label><input name="emergency_contact" id="eph-profile-emergency_contact" autocomplete="off"></div><div class="field"><label for="eph-profile-emergency_phone">เบอร์โทรฉุกเฉิน</label><input name="emergency_phone" id="eph-profile-emergency_phone" type="tel" maxlength="32" autocomplete="off"></div><div class="field"><label for="eph-profile-occupation">อาชีพ</label><input name="occupation" id="eph-profile-occupation" autocomplete="off"></div><div class="field"><label for="eph-profile-coverage">สิทธิการรักษา</label><select name="coverage" id="eph-profile-coverage"><option value="">เลือกหรือเว้นว่าง</option><option>ชำระเงินเอง</option><option>ประกันสุขภาพ</option><option>Package</option></select></div><div class="field full"><label for="profileMedicalHistory">โรคประจำตัวและประวัติสุขภาพ</label><textarea name="underlying_diseases" autocomplete="off" id="profileMedicalHistory"></textarea></div><div class="field full"><label for="opdAllergy">ประวัติการแพ้ยา</label><textarea name="allergies" autocomplete="off" id="opdAllergy" placeholder="ชื่อยา อาการแพ้ หรือระบุว่าไม่ทราบ"></textarea></div><div class="field full"><label for="opdLab">ผลตรวจทางห้องปฏิบัติการ / การตรวจเพิ่มเติม</label><textarea name="lab_results" autocomplete="off" id="opdLab" placeholder="ผลตรวจ วันที่ และแหล่งข้อมูล (ถ้ามี)"></textarea></div></div></div><div class="savebar"><span class="muted" role="status" id="ephProfileStatus"></span><button class="btn primary" type="submit" disabled>บันทึกข้อมูลผู้ป่วย</button></div></form><aside><div class="card"><div class="card-title"><h2>ความครบถ้วนข้อมูล</h2><b id="ephProfilePercent" style="color:var(--green)">0%</b></div><div class="progress" style="background:#e9eef5"><i id="ephProfileProgress" style="width:0%"></i></div></div></aside></div></div>
 
         <div class="patient-panel" data-panel="episodes"><div class="card"><div class="card-title"><div><h2>การ์ดการรักษา / Episode of Care</h2><span>ผู้ป่วยหนึ่งรายสามารถเปิดได้หลาย Episode โดยแยกผลลัพธ์และต้นทุน</span></div><button class="btn primary" id="openEpisode" disabled>＋ เปิดการ์ดการรักษาใหม่</button></div><div class="episode-grid"></div></div><div class="card" id="episodeForm" style="margin-top:16px;display:none" hidden=""><div class="card-title"><h2>เปิดการ์ดการรักษาใหม่</h2><button class="btn" onclick="document.getElementById('episodeForm').style.display='none'" disabled>✕ ปิด</button></div><div class="form-grid"><div class="field"><label>อาการสำคัญ / Episode Name</label><input></div><div class="field"><label>ประเภทบริการ</label><select><option>General Physiotherapy</option><option>Sport Rehabilitation</option><option>Home visit</option><option>IMC</option></select></div><div class="field"><label>วันที่เปิดการรักษา</label><input type="date"></div><div class="field"><label>นักกายภาพบำบัดหลัก</label><select></select></div><div class="field full"><label>รูปแบบการรักษา</label><div class="course-choices"><div class="course-choice selected"><b>นัดต่อเนื่องรายครั้ง</b><small>กำหนดจำนวนครั้งและชำระแต่ละ Visit</small></div><div class="course-choice"><b>ซื้อเป็นคอร์ส / Package</b><small>ชำระล่วงหน้า ติดตาม Used และ Remaining Visits</small></div></div></div><div class="field"><label>จำนวนครั้งที่คาดหมาย</label><input type="number"></div><div class="field"><label>ความถี่</label><select><option>2 ครั้ง / สัปดาห์</option><option>1 ครั้ง / สัปดาห์</option><option>3 ครั้ง / สัปดาห์</option></select></div><div class="field"><label>ราคา Package</label><input></div><div class="field"><label>วันหมดอายุ</label><input type="date"></div><div class="field full"><label>แผนการนัดหมาย</label><textarea></textarea></div></div><div style="text-align:right;margin-top:14px"><button class="btn" disabled>บันทึกร่าง</button> <button class="btn primary" onclick="notify('เปิด Episode และสร้างแผนการนัดหมายแล้ว')" disabled>เปิดการรักษาและสร้างนัด</button></div></div></div>
 
@@ -974,6 +974,67 @@ button:disabled{cursor:not-allowed;opacity:.55}
     }
     draw();
   }
+  async function loadPatientProfile(record,patient){
+    const form=record.querySelector('#ephProfileForm'),status=record.querySelector('#ephProfileStatus');
+    const button=form.querySelector('[type=submit]');
+    const token=staffToken;
+    const fields=Array.from(form.querySelectorAll('[name]'));
+    const isCurrent=()=>record.isConnected&&record.dataset.profileHn===patient.hn&&staffToken===token;
+    record.dataset.profileHn=patient.hn;
+    form.onsubmit=null;
+    form.reset();
+    form.elements.hn.value=patient.hn;
+    fields.forEach(field=>field.disabled=field.name!=='hn');
+    button.disabled=true;
+    status.textContent='กำลังโหลดข้อมูล…';
+    function completeness(){
+      const tracked=fields.filter(field=>field.name!=='hn');
+      const percent=Math.round(100*tracked.filter(field=>field.value.trim()).length/tracked.length);
+      record.querySelector('#ephProfilePercent').textContent=percent+'%';
+      record.querySelector('#ephProfileProgress').style.width=percent+'%';
+    }
+    form.oninput=completeness;
+    completeness();
+    try{
+      const params=new URLSearchParams({select:fields.map(field=>field.name).join(','),hn:'eq.'+patient.hn});
+      const response=await staffRequest('/rest/v1/patients?'+params,{token});
+      if(!response.ok)throw Error('Profile unavailable');
+      const [profile]=await response.json();
+      if(!isCurrent())return;
+      if(!profile)throw Error('Patient not found');
+      for(const field of fields){
+        const value=profile[field.name];
+        field.value=field.name==='address'?(typeof value==='string'?value:value?.formatted??''):value??'';
+        field.disabled=false;
+      }
+      button.disabled=false;
+      status.textContent='';
+      completeness();
+      form.onsubmit=async event=>{
+        event.preventDefault();
+        if(!isCurrent()||button.disabled)return;
+        const profile=Object.fromEntries(fields.filter(field=>field.name!=='hn').map(field=>[field.name,field.value.trim()]));
+        if(!profile.first_name||!profile.last_name){status.textContent='กรุณากรอกชื่อและนามสกุล';return}
+        button.disabled=true;
+        status.textContent='กำลังบันทึก…';
+        try{
+          const response=await staffRequest('/rest/v1/rpc/update_patient_profile',{method:'POST',token,body:{patient_hn:patient.hn,profile}});
+          if(!response.ok)throw Error('Profile update failed');
+          const [saved]=await response.json();
+          if(!isCurrent())return;
+          if(saved?.hn!==patient.hn)throw Error('Profile update not confirmed');
+          record.querySelector('#ephSelectedPatient').textContent=profile.first_name+' '+profile.last_name;
+          status.textContent='บันทึกข้อมูลผู้ป่วยแล้ว';
+        }catch{
+          if(isCurrent())status.textContent='บันทึกไม่สำเร็จ กรุณาตรวจข้อมูลแล้วลองอีกครั้ง';
+        }finally{
+          if(isCurrent())button.disabled=false;
+        }
+      };
+    }catch{
+      if(isCurrent())status.textContent='โหลดข้อมูลผู้ป่วยไม่ได้ กรุณากลับไปค้นหาและเปิดเวชระเบียนอีกครั้ง';
+    }
+  }
   function wireRecord(root){
     const record=root.querySelector('#patientRecord'),lookup=root.querySelector('#patientLookup');
     function show(tab){
@@ -996,6 +1057,7 @@ button:disabled{cursor:not-allowed;opacity:.55}
       lookup.hidden=true;
       record.hidden=false;
       show('profile');
+      void loadPatientProfile(record,patient);
       record.querySelector('#patientRecordTitle').focus();
     };
   }
