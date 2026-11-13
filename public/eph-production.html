@@ -373,7 +373,20 @@ button:disabled{cursor:not-allowed;opacity:.55}
 
         <div class="patient-panel" data-panel="profile"><div class="clinical-layout"><form class="card" id="ephProfileForm"><div class="card-title"><h2>ข้อมูลประวัติส่วนตัว</h2><span>—</span></div><div class="form-section"><h3><span class="num">01</span>ข้อมูลระบุตัวบุคคล</h3><div class="form-grid"><div class="field"><label for="eph-profile-national_id">เลขประจำตัวประชาชน</label><input name="national_id" id="eph-profile-national_id" inputmode="numeric" maxlength="13" pattern="[0-9]{13}" autocomplete="off"></div><div class="field"><label for="eph-profile-hn">HN</label><input name="hn" id="eph-profile-hn" readonly autocomplete="off"></div><div class="field"><label for="eph-profile-first_name">ชื่อ</label><input name="first_name" id="eph-profile-first_name" required maxlength="120" autocomplete="off"></div><div class="field"><label for="eph-profile-last_name">นามสกุล</label><input name="last_name" id="eph-profile-last_name" required maxlength="120" autocomplete="off"></div><div class="field"><label for="eph-profile-birth_date">วันเดือนปีเกิด</label><input name="birth_date" id="eph-profile-birth_date" autocomplete="off" type="date"></div><div class="field"><label for="eph-profile-sex">เพศ</label><select name="sex" id="eph-profile-sex"><option value="">เลือกหรือเว้นว่าง</option><option>ชาย</option><option>หญิง</option><option>ไม่ระบุ</option></select></div><div class="field"><label for="eph-profile-phone">เบอร์โทรศัพท์</label><input name="phone" id="eph-profile-phone" type="tel" maxlength="32" autocomplete="off"></div><div class="field"><label for="eph-profile-contact_channel">LINE / Email</label><input name="contact_channel" id="eph-profile-contact_channel" autocomplete="off"></div><div class="field full"><label for="eph-profile-address">ที่อยู่</label><textarea name="address" id="eph-profile-address" autocomplete="off"></textarea></div></div></div><div class="form-section"><h3><span class="num">02</span>ข้อมูลติดต่อฉุกเฉินและสุขภาพ</h3><div class="form-grid"><div class="field"><label for="eph-profile-emergency_contact">ผู้ติดต่อฉุกเฉิน</label><input name="emergency_contact" id="eph-profile-emergency_contact" autocomplete="off"></div><div class="field"><label for="eph-profile-emergency_phone">เบอร์โทรฉุกเฉิน</label><input name="emergency_phone" id="eph-profile-emergency_phone" type="tel" maxlength="32" autocomplete="off"></div><div class="field"><label for="eph-profile-occupation">อาชีพ</label><input name="occupation" id="eph-profile-occupation" autocomplete="off"></div><div class="field"><label for="eph-profile-coverage">สิทธิการรักษา</label><select name="coverage" id="eph-profile-coverage"><option value="">เลือกหรือเว้นว่าง</option><option>ชำระเงินเอง</option><option>ประกันสุขภาพ</option><option>Package</option></select></div><div class="field full"><label for="profileMedicalHistory">โรคประจำตัวและประวัติสุขภาพ</label><textarea name="underlying_diseases" autocomplete="off" id="profileMedicalHistory"></textarea></div><div class="field full"><label for="opdAllergy">ประวัติการแพ้ยา</label><textarea name="allergies" autocomplete="off" id="opdAllergy" placeholder="ชื่อยา อาการแพ้ หรือระบุว่าไม่ทราบ"></textarea></div><div class="field full"><label for="opdLab">ผลตรวจทางห้องปฏิบัติการ / การตรวจเพิ่มเติม</label><textarea name="lab_results" autocomplete="off" id="opdLab" placeholder="ผลตรวจ วันที่ และแหล่งข้อมูล (ถ้ามี)"></textarea></div></div></div><div class="savebar"><span class="muted" role="status" id="ephProfileStatus"></span><button class="btn primary" type="submit" disabled>บันทึกข้อมูลผู้ป่วย</button></div></form><aside><div class="card"><div class="card-title"><h2>ความครบถ้วนข้อมูล</h2><b id="ephProfilePercent" style="color:var(--green)">0%</b></div><div class="progress" style="background:#e9eef5"><i id="ephProfileProgress" style="width:0%"></i></div></div></aside></div></div>
 
-        <div class="patient-panel" data-panel="episodes"><div class="card"><div class="card-title"><div><h2>การ์ดการรักษา / Episode of Care</h2><span>ผู้ป่วยหนึ่งรายสามารถเปิดได้หลาย Episode โดยแยกผลลัพธ์และต้นทุน</span></div><button class="btn primary" id="openEpisode" disabled>＋ เปิดการ์ดการรักษาใหม่</button></div><div class="episode-grid"></div></div><div class="card" id="episodeForm" style="margin-top:16px;display:none" hidden=""><div class="card-title"><h2>เปิดการ์ดการรักษาใหม่</h2><button class="btn" onclick="document.getElementById('episodeForm').style.display='none'" disabled>✕ ปิด</button></div><div class="form-grid"><div class="field"><label>อาการสำคัญ / Episode Name</label><input></div><div class="field"><label>ประเภทบริการ</label><select><option>General Physiotherapy</option><option>Sport Rehabilitation</option><option>Home visit</option><option>IMC</option></select></div><div class="field"><label>วันที่เปิดการรักษา</label><input type="date"></div><div class="field"><label>นักกายภาพบำบัดหลัก</label><select></select></div><div class="field full"><label>รูปแบบการรักษา</label><div class="course-choices"><div class="course-choice selected"><b>นัดต่อเนื่องรายครั้ง</b><small>กำหนดจำนวนครั้งและชำระแต่ละ Visit</small></div><div class="course-choice"><b>ซื้อเป็นคอร์ส / Package</b><small>ชำระล่วงหน้า ติดตาม Used และ Remaining Visits</small></div></div></div><div class="field"><label>จำนวนครั้งที่คาดหมาย</label><input type="number"></div><div class="field"><label>ความถี่</label><select><option>2 ครั้ง / สัปดาห์</option><option>1 ครั้ง / สัปดาห์</option><option>3 ครั้ง / สัปดาห์</option></select></div><div class="field"><label>ราคา Package</label><input></div><div class="field"><label>วันหมดอายุ</label><input type="date"></div><div class="field full"><label>แผนการนัดหมาย</label><textarea></textarea></div></div><div style="text-align:right;margin-top:14px"><button class="btn" disabled>บันทึกร่าง</button> <button class="btn primary" onclick="notify('เปิด Episode และสร้างแผนการนัดหมายแล้ว')" disabled>เปิดการรักษาและสร้างนัด</button></div></div></div>
+        <div class="patient-panel" data-panel="episodes"><div class="card"><div class="card-title"><div><h2>การ์ดการรักษา / Episode of Care</h2><span>ผู้ป่วยหนึ่งรายสามารถเปิดได้หลาย Episode โดยแยกผลลัพธ์และต้นทุน</span></div><button class="btn primary" id="openEpisode" disabled>＋ เปิดการ์ดการรักษาใหม่</button></div><div class="episode-grid"></div></div><form class="card" id="episodeForm" hidden>
+<div class="card-title"><h2>เปิดการ์ดการรักษาใหม่</h2><button type="button" class="btn" data-episode-close>ปิด</button></div>
+<div class="form-grid">
+<label class="field">อาการสำคัญ / ชื่อ Episode<input name="name" required maxlength="160"></label>
+<label class="field">ประเภทบริการ<select name="category"><option value="general">กายภาพบำบัดทั่วไป / เยี่ยมบ้าน</option><option value="msk">ระบบกระดูกและกล้ามเนื้อ</option><option value="sports">ฟื้นฟูนักกีฬา</option><option value="imc_abi">IMC · สมองและระบบประสาท</option><option value="imc_hip">IMC · กระดูกสะโพกหัก</option></select></label>
+<label class="field">วันที่เปิดการรักษา<input type="date" name="opened_on" required></label>
+<label class="field">จำนวนครั้งที่คาดหมาย<input type="number" name="planned_visits" min="1" required></label>
+<label class="field">รูปแบบการรักษา<select name="mode"><option value="visit">นัดต่อเนื่องรายครั้ง</option><option value="package">ซื้อเป็นคอร์ส / Package</option></select></label>
+<label class="field">ครั้งต่อสัปดาห์<input type="number" name="visits_per_week" min="1" max="7"></label>
+<label class="field" data-package hidden>ราคา Package (บาท)<input name="price" type="number" min="0" step="0.01" disabled></label>
+<label class="field" data-package hidden>วันหมดอายุ<input name="expires_on" type="date" disabled></label>
+<label class="field full">แผนการนัดหมาย<textarea name="appointment_plan" maxlength="2000"></textarea></label>
+</div><div class="actions"><button class="btn primary" type="submit">เปิดการ์ดการรักษา</button><span data-episode-status role="status"></span></div>
+</form></div>
 
         <div class="patient-panel active" data-panel="clinical">
           <div id="imcSpecificPanel" class="card imc-record" hidden>
@@ -659,7 +672,7 @@ button:disabled{cursor:not-allowed;opacity:.55}
     if(token)await staffRequest('/auth/v1/logout?scope='+scope,{method:'POST',token}).catch(()=>{});
   }
   async function fetchStaffProfile(userId,token){
-    const response=await staffRequest('/rest/v1/staff?select=id,name,role,license_no,must_change_password&active=eq.true&id=eq.'+encodeURIComponent(userId),{token});
+    const response=await staffRequest('/rest/v1/staff?select=id,name,role,license_no,must_change_password,branch_id&active=eq.true&id=eq.'+encodeURIComponent(userId),{token});
     if(!response.ok)throw new Error('Staff profile unavailable');
     const [profile]=await response.json();
     return profile;
@@ -1035,6 +1048,72 @@ button:disabled{cursor:not-allowed;opacity:.55}
       if(isCurrent())status.textContent='โหลดข้อมูลผู้ป่วยไม่ได้ กรุณากลับไปค้นหาและเปิดเวชระเบียนอีกครั้ง';
     }
   }
+  function wirePatientEpisodes(record,patient){
+    const form=record.querySelector('#episodeForm'),open=record.querySelector('#openEpisode');
+    const list=record.querySelector('.episode-grid'),status=form.querySelector('[data-episode-status]');
+    const save=form.querySelector('[type=submit]'),staff=activeStaff(),token=staffToken;
+    const request={token,method:'POST'};
+    const current=()=>record.isConnected&&staffToken===token&&record.dataset.episodeHn===patient.hn;
+    record.dataset.episodeHn=patient.hn;
+    form.reset();
+    form.hidden=true;
+    open.disabled=!['admin','physiotherapist'].includes(staff.role);
+    save.disabled=!staff.branch_id;
+    status.textContent=staff.branch_id?'':'บัญชีนี้ยังไม่มีสาขาประจำ กรุณาติดต่อผู้ดูแลระบบ';
+    const syncPackage=()=>{
+      const enabled=form.elements.mode.value==='package';
+      for(const field of form.querySelectorAll('[data-package]')){
+        const input=field.querySelector('input');
+        field.hidden=!enabled;
+        input.disabled=!enabled;
+        input.required=enabled&&input.name==='price';
+      }
+    };
+    form.elements.mode.onchange=syncPackage;
+    syncPackage();
+    open.onclick=()=>{
+      form.hidden=false;
+      if(!form.elements.opened_on.value)form.elements.opened_on.value=new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Bangkok',dateStyle:'short'}).format(new Date());
+      form.elements.name.focus();
+    };
+    form.querySelector('[data-episode-close]').onclick=()=>{form.hidden=true;open.focus()};
+    async function refresh(){
+      list.replaceChildren(node('p','กำลังโหลดการ์ดการรักษา…'));
+      try{
+        const response=await staffRequest('/rest/v1/rpc/patient_episodes',{...request,body:{patient_hn:patient.hn}});
+        if(!response.ok)throw Error();
+        const rows=await response.json();
+        if(!current())return;
+        list.replaceChildren();
+        if(!rows.length)list.append(node('p','ยังไม่มีการ์ดการรักษา'));
+        for(const episode of rows){
+          const card=document.createElement('article');
+          card.className='episode-card';
+          card.append(node('h3',episode.name),node('p',(episode.status==='active'?'กำลังรักษา':'จำหน่ายแล้ว')+' · '+episode.opened_on),node('p','จำนวนครั้งตามแผน '+(episode.planned_visits??'—')),node('small',episode.episode_no));
+          list.append(card);
+        }
+      }catch{if(current())list.replaceChildren(node('p','โหลดการ์ดการรักษาไม่ได้ กรุณาเปิดเวชระเบียนอีกครั้ง'))}
+    }
+    form.onsubmit=async event=>{
+      event.preventDefault();
+      if(!current()||save.disabled)return;
+      const episode=Object.fromEntries([...new FormData(form)].map(([key,value])=>[key,value.trim()]));
+      if(!episode.name){status.textContent='กรุณาระบุชื่อการรักษา';return}
+      if(episode.expires_on&&episode.expires_on<episode.opened_on){status.textContent='วันหมดอายุต้องไม่ก่อนวันเปิดการรักษา';return}
+      save.disabled=true;
+      status.textContent='กำลังเปิดการ์ด…';
+      try{
+        const response=await staffRequest('/rest/v1/rpc/open_patient_episode',{...request,body:{patient_hn:patient.hn,episode}});
+        if(!response.ok)throw Error();
+        if(!current())return;
+        form.reset();syncPackage();form.hidden=true;
+        notify('เปิดการ์ดการรักษาแล้ว');
+        await refresh();
+      }catch{if(current())status.textContent='เปิดการ์ดไม่สำเร็จ กรุณาลองอีกครั้ง'}
+      finally{if(current())save.disabled=false}
+    };
+    void refresh();
+  }
   function wireRecord(root){
     const record=root.querySelector('#patientRecord'),lookup=root.querySelector('#patientLookup');
     const tabs=[...record.querySelectorAll('[data-eph-tab]')];
@@ -1083,8 +1162,6 @@ button:disabled{cursor:not-allowed;opacity:.55}
       lookup.querySelector('input[type=search]').focus();
     };
     for(const button of record.querySelectorAll('[data-eph-tab]'))button.onclick=()=>show(button.dataset.ephTab);
-    const open=root.querySelector('#openEpisode');
-    if(open){open.disabled=false;open.onclick=()=>{root.querySelector('#episodeForm').hidden=false}};
     return patient=>{
       record.querySelector('#ephSelectedPatient').textContent=[patient.first_name,patient.last_name].filter(Boolean).join(' ');
       record.querySelector('#patientEpisodeLabel').textContent='HN '+patient.hn;
@@ -1092,6 +1169,7 @@ button:disabled{cursor:not-allowed;opacity:.55}
       record.hidden=false;
       show('profile');
       void loadPatientProfile(record,patient);
+      wirePatientEpisodes(record,patient);
       record.querySelector('#patientRecordTitle').focus();
     };
   }
