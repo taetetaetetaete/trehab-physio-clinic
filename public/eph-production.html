@@ -654,9 +654,10 @@ button:disabled{cursor:not-allowed;opacity:.55}
     element.textContent=message;
     element.classList.toggle('show',Boolean(message));
   }
-  function staffRequest(path,{method='GET',token,body}={}){
+  function staffRequest(path,{method='GET',token,body,prefer}={}){
     const headers={...staffAuthHeaders};
     if(token)headers.Authorization='Bearer '+token;
+    if(prefer)headers.Prefer=prefer;
     return fetch(staffAuthBase+path,{method,headers,body:body===undefined?undefined:JSON.stringify(body)});
   }
   async function closeStaffSession(token,scope='local'){
@@ -870,7 +871,6 @@ button:disabled{cursor:not-allowed;opacity:.55}
   function registerPatient(root){
     const form=document.createElement('form');
     const fields=[
-      ['hn','เลขประจำตัวผู้ป่วย (HN)',true,'off'],
       ['first_name','ชื่อ',true,'given-name'],
       ['last_name','นามสกุล',true,'family-name'],
       ['phone','เบอร์โทรศัพท์',false,'tel']
@@ -880,7 +880,7 @@ button:disabled{cursor:not-allowed;opacity:.55}
     for(const [name,label,required,autocomplete] of fields){
       const wrap=node('label',label);
       wrap.className='field';
-      if(name==='hn'||name==='phone')wrap.classList.add('eph-registration-wide');
+      if(name==='phone')wrap.classList.add('eph-registration-wide');
       if(!required){
         const caption=node('span',label+' (ไม่บังคับ)');
         caption.className='eph-registration-optional';
@@ -904,23 +904,30 @@ button:disabled{cursor:not-allowed;opacity:.55}
     const status=node('p','');
     status.className='eph-registration-status';
     status.setAttribute('role','status');
-    form.append(grid,actions,status);
+    const hnNote=node('p','ระบบจะออกเลข HN ให้อัตโนมัติเมื่อบันทึก');
+    hnNote.className='muted';
+    form.append(hnNote,grid,actions,status);
     root.append(form);
     form.onsubmit=async event=>{
       event.preventDefault();
       button.disabled=true;
       status.textContent='กำลังบันทึก…';
       const body=Object.fromEntries([...new FormData(form)].map(([key,value])=>[key,value.trim()]));
-      if(!body.hn||!body.first_name||!body.last_name){
-        status.textContent='กรุณากรอก HN ชื่อ และนามสกุล';
+      if(!body.first_name||!body.last_name){
+        status.textContent='กรุณากรอกชื่อและนามสกุล';
         button.disabled=false;
         return;
       }
       if(!body.phone)delete body.phone;
       try{
-        const response=await staffRequest('/rest/v1/patients',{method:'POST',token:staffToken,body});
-        if(response.ok){go('patients/register');return}
-        status.textContent=response.status===409?'HN นี้มีในทะเบียนแล้ว':'บันทึกไม่สำเร็จ กรุณาตรวจสิทธิ์และลองอีกครั้ง';
+        const response=await staffRequest('/rest/v1/patients?select=hn',{method:'POST',token:staffToken,body,prefer:'return=representation'});
+        if(response.ok){
+          const [patient]=await response.json().catch(()=>[]);
+          go('patients/register');
+          notify(patient?.hn?'บันทึกผู้ป่วยแล้ว · HN '+patient.hn:'บันทึกผู้ป่วยแล้ว');
+          return;
+        }
+        status.textContent='บันทึกไม่สำเร็จ กรุณาตรวจสิทธิ์และลองอีกครั้ง';
       }catch{status.textContent='เชื่อมต่อไม่ได้ กรุณาลองใหม่'}
       finally{button.disabled=false}
     };
