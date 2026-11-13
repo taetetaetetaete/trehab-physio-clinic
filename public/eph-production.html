@@ -786,7 +786,9 @@ button:disabled{cursor:not-allowed;opacity:.55}
     return element;
   }
   function go(path){
-    history.pushState(null,'',basePath+'/'+path);
+    const destination=basePath+'/'+path;
+    if(location.pathname===destination)return;
+    history.pushState(null,'',destination);
     renderRoute();
   }
   function showPatients(root){
@@ -962,10 +964,11 @@ button:disabled{cursor:not-allowed;opacity:.55}
     event.preventDefault();
     go(link.pathname.slice(basePath.length+1));
   });
-  function renderStaffSettings(root,staff){
+  function renderStaffSettings(root,staff,requestedTab){
     const tabs=[['accounts','บัญชีผู้ใช้งาน'],['roles','บทบาทและสิทธิ์'],['clinic','ตั้งค่าคลินิก'],['audit','ประวัติการแก้ไข']];
-    const toolbar=document.createElement('div');
+    const toolbar=document.createElement('nav');
     toolbar.className='actions';
+    toolbar.setAttribute('aria-label','เมนูผู้ใช้งานและตั้งค่า');
     const body=document.createElement('div');
     body.style.marginTop='16px';
     const roleNames={admin:'ผู้ดูแลระบบ',physiotherapist:'นักกายภาพบำบัด',finance:'เจ้าหน้าที่การเงิน',reception:'เจ้าหน้าที่ต้อนรับ'};
@@ -985,7 +988,8 @@ button:disabled{cursor:not-allowed;opacity:.55}
       for(const button of toolbar.children){
         const active=button.dataset.adminTab===tab;
         button.classList.toggle('primary',active);
-        button.setAttribute('aria-pressed',String(active));
+        if(active)button.setAttribute('aria-current','page');
+        else button.removeAttribute('aria-current');
       }
       body.replaceChildren();
       if(tab==='accounts'){
@@ -1017,15 +1021,15 @@ button:disabled{cursor:not-allowed;opacity:.55}
       }
     }
     for(const [key,title] of tabs){
-      const button=node('button',title);
-      button.type='button';
-      button.className='btn';
-      button.dataset.adminTab=key;
-      button.onclick=()=>render(key);
-      toolbar.append(button);
+      const link=node('a',title);
+      link.href=basePath+'/users/'+key;
+      link.className='btn';
+      link.dataset.adminTab=key;
+      link.dataset.ephLink='';
+      toolbar.append(link);
     }
     root.append(toolbar,body);
-    render('accounts');
+    render(tabs.some(([key])=>key===requestedTab)?requestedTab:'accounts');
   }
   function renderRoute(){
     const staff=activeStaff();
@@ -1033,7 +1037,8 @@ button:disabled{cursor:not-allowed;opacity:.55}
     document.getElementById('ephStaffName').textContent=staff.name||staff.email;
     document.getElementById('ephStaffRole').textContent=staff.role;
     const path=location.pathname.replace(/^\/eph(?=\/|$)/,'').replace(/^\/|\/$/g,'')||'dashboard';
-    const key=aliases[path]||(path.startsWith('patients/')?'patients':path);
+    const settingsPath=path.match(/^users(?:\/([^/]+))?$/);
+    const key=settingsPath?'users':aliases[path]||(path.startsWith('patients/')?'patients':path);
     for(const button of nav)button.classList.toggle('active',button.dataset.page===key);
     const heading=document.createElement('div');
     heading.className='heading';
@@ -1058,7 +1063,7 @@ button:disabled{cursor:not-allowed;opacity:.55}
     }else if(key==='patient-registration'){
       card.append(node('p','บัญชีนี้ไม่มีสิทธิ์เพิ่มผู้ป่วย'));
     }else if(key==='users'){
-      renderStaffSettings(card,staff);
+      renderStaffSettings(card,staff,settingsPath?.[1]);
     }else if(key==='coding'&&!layout){
       card.append(node('p','รูปแบบ HN YYYY-XXXXX-UUUU'));
     }else if(key==='sitemap'&&!layout){
