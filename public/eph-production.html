@@ -301,6 +301,22 @@ button:disabled{cursor:not-allowed;opacity:.55}
 
     <div class="content"><section class="page active" id="ephPage"></section></div></main></div>
 <p id="ephStatus" role="status" hidden style="position:fixed;bottom:1rem;right:1rem;z-index:100;background:#fff;padding:1rem;border:1px solid #cedae6;border-radius:.6rem"></p>
+<template id="layout-dashboard"><div class="card"><div class="card-title"><h2>งานที่ต้องทำต่อ</h2></div><div class="actions"><a class="btn primary" href="/eph/patients/new" data-eph-link>ลงทะเบียนผู้ป่วยรายใหม่</a><a class="btn" href="/eph/patients/register" data-eph-link>เปิดสมุดทะเบียนผู้ป่วย</a></div></div>
+  <div class="grid kpis"><div class="card kpi"><div class="label">ผู้ป่วยวันนี้</div><div class="value">—</div></div><div class="card kpi"><div class="label">Visits เดือนนี้</div><div class="value">—</div></div><div class="card kpi"><div class="label">รายได้เดือนนี้</div><div class="value">—</div></div><div class="card kpi"><div class="label">กำไรสุทธิ</div><div class="value">—</div></div><div class="card kpi"><div class="label">Outcome ดีขึ้น</div><div class="value">—</div></div></div>
+  <div class="grid two"><article class="card"><div class="card-title"><h2>รายได้และต้นทุนรายเดือน</h2></div><p class="muted">ยังไม่มีข้อมูลการเงินสำหรับแสดงกราฟ</p></article><article class="card bep"><div class="card-title"><h2>จุดคุ้มทุน</h2></div><p>รอข้อมูลรายได้และต้นทุน</p></article></div>
+  <div class="grid three"><article class="card"><div class="card-title"><h2>นัดหมายวันนี้</h2></div><p class="muted">ยังไม่มีข้อมูลแสดง</p></article><article class="card"><div class="card-title"><h2>ผลลัพธ์การรักษา</h2></div><p class="muted">ยังไม่มีข้อมูลแสดง</p></article><article class="card"><div class="card-title"><h2>โครงสร้างต้นทุน</h2></div><p class="muted">ยังไม่มีข้อมูลแสดง</p></article></div>
+  <article class="card"><div class="card-title"><h2>ผลประกอบการตามบริการ</h2></div><div class="table-wrap"><table class="table"><thead><tr><th>บริการ</th><th>Visits</th><th>รายได้</th><th>ต้นทุนรวม</th><th>กำไร</th><th>Outcome</th></tr></thead><tbody><tr><td colspan="6">ยังไม่มีข้อมูลบริการสำหรับสรุป</td></tr></tbody></table></div></article></template>
+<template id="layout-appointments"><article class="card calendar-card"><div class="cal-toolbar"><h2 data-calendar-title></h2><div class="cal-controls"><button class="btn" data-month="-1" aria-label="เดือนก่อนหน้า">‹</button><button class="btn" data-month="0">วันนี้</button><button class="btn" data-month="1" aria-label="เดือนถัดไป">›</button></div></div><div class="cal-weekdays" aria-hidden="true"><span>จันทร์</span><span>อังคาร</span><span>พุธ</span><span>พฤหัส</span><span>ศุกร์</span><span>เสาร์</span><span>อาทิตย์</span></div><div data-calendar-grid style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px"></div><p class="muted">ยังไม่ได้เชื่อมข้อมูลนัดหมาย</p></article></template>
+<template id="layout-patient-registration"><div class="form-section card"><div class="card-title"><h2>ข้อมูลระบุตัวบุคคล</h2></div><div data-module></div></div></template>
+<template id="layout-patients"><div class="card"><div class="card-title"><h2>ค้นหาผู้ป่วย</h2><a class="btn primary" href="/eph/patients/new" data-eph-link>เพิ่มผู้ป่วย</a></div><div data-module></div></div><div class="card"><h2>การ์ดการรักษา / Episode of Care</h2><p class="muted">ยังไม่ได้เชื่อมข้อมูลการรักษา</p></div></template>
+<template id="layout-patient-register"><div class="card"><div class="card-title"><h2>รายการผู้ป่วย</h2><a class="btn primary" href="/eph/patients/new" data-eph-link>เพิ่มผู้ป่วย</a></div><div data-module></div></div></template>
+<template id="layout-billing"><div class="grid two"><article class="card"><div class="card-title"><h2>สรุปยอดรับชำระ</h2></div><p class="muted">ยังไม่ได้เชื่อมข้อมูลส่วนนี้</p></article><article class="card"><div class="card-title"><h2>รายการรับชำระตามวัน</h2></div><p class="muted">ยังไม่ได้เชื่อมข้อมูลส่วนนี้</p></article></div></template>
+<template id="layout-accounting"><div class="grid two"><article class="card"><div class="card-title"><h2>ยอดอ้างอิงจาก POS</h2></div><p class="muted">ยังไม่ได้เชื่อมข้อมูลส่วนนี้</p></article><article class="card"><div class="card-title"><h2>รายการรับ–จ่าย</h2></div><p class="muted">ยังไม่ได้เชื่อมข้อมูลส่วนนี้</p></article><article class="card"><div class="card-title"><h2>กระทบยอดประจำวัน</h2></div><p class="muted">ยังไม่ได้เชื่อมข้อมูลส่วนนี้</p></article></div></template>
+<template id="layout-cost"><div class="grid two"><article class="card"><div class="card-title"><h2>องค์ประกอบต้นทุน</h2></div><p class="muted">ยังไม่ได้เชื่อมข้อมูลส่วนนี้</p></article><article class="card"><div class="card-title"><h2>ต้นทุนต่อบริการ</h2></div><p class="muted">ยังไม่ได้เชื่อมข้อมูลส่วนนี้</p></article></div></template>
+<template id="layout-stock"><div class="grid two"><article class="card"><div class="card-title"><h2>ยอดคงเหลือตามล็อต</h2></div><p class="muted">ยังไม่ได้เชื่อมข้อมูลส่วนนี้</p></article><article class="card"><div class="card-title"><h2>ประวัติความเคลื่อนไหว</h2></div><p class="muted">ยังไม่ได้เชื่อมข้อมูลส่วนนี้</p></article></div></template>
+<template id="layout-outcomes"><div class="grid two"><article class="card"><div class="card-title"><h2>ผลลัพธ์ราย Visit</h2></div><p class="muted">ยังไม่ได้เชื่อมข้อมูลส่วนนี้</p></article><article class="card"><div class="card-title"><h2>ตัวชี้วัดการรักษา</h2></div><p class="muted">ยังไม่ได้เชื่อมข้อมูลส่วนนี้</p></article></div></template>
+<template id="layout-reports"><div class="grid two"><article class="card"><div class="card-title"><h2>รายงานบริการ</h2></div><p class="muted">ยังไม่ได้เชื่อมข้อมูลส่วนนี้</p></article><article class="card"><div class="card-title"><h2>รายงานการเงิน</h2></div><p class="muted">ยังไม่ได้เชื่อมข้อมูลส่วนนี้</p></article></div></template>
+<template id="layout-imc-adl"><div class="grid two"><article class="card"><div class="card-title"><h2>ประวัติการประเมิน Barthel ADL</h2></div><p class="muted">ยังไม่ได้เชื่อมข้อมูลส่วนนี้</p></article></div></template>
 <script>
   const loginPage=document.getElementById('loginPage'),appShell=document.getElementById('appShell'),loginForm=document.getElementById('loginForm'),loginError=document.getElementById('loginError');
   const staffAuthBase='https://biavphcsyahdvhqeexyj.supabase.co';
@@ -452,9 +468,36 @@ button:disabled{cursor:not-allowed;opacity:.55}
       if(!output.isConnected||staffToken!==token)return;
       output.textContent=rows.length?'ทะเบียนผู้ป่วย (สูงสุด 100 รายการ)':'ยังไม่มีผู้ป่วยในทะเบียน';
       if(!rows.length)return;
-      const list=document.createElement('ul');
-      for(const row of rows)list.append(node('li',row.hn+' · '+row.first_name+' '+row.last_name));
-      root.append(list);
+      const search=document.createElement('input');
+      search.type='search';
+      search.placeholder='ค้นหาจาก HN หรือชื่อ';
+      search.setAttribute('aria-label',search.placeholder);
+      const field=document.createElement('label');
+      field.className='field';
+      field.append(search);
+      const wrap=document.createElement('div');
+      wrap.className='table-wrap';
+      const table=document.createElement('table');
+      table.className='table';
+      const header=table.createTHead().insertRow();
+      for(const title of ['HN','ชื่อ–นามสกุล'])header.append(node('th',title));
+      const body=table.createTBody();
+      const render=()=>{
+        const term=search.value.trim().toLocaleLowerCase('th');
+        body.replaceChildren();
+        for(const row of rows){
+          const name=row.first_name+' '+row.last_name;
+          if(!(row.hn+' '+name).toLocaleLowerCase('th').includes(term))continue;
+          const tr=body.insertRow();
+          tr.insertCell().textContent=row.hn;
+          tr.insertCell().textContent=name;
+        }
+        if(!body.rows.length){const cell=body.insertRow().insertCell();cell.colSpan=2;cell.textContent='ไม่พบผู้ป่วยที่ตรงกับคำค้น'}
+      };
+      search.oninput=render;
+      render();
+      wrap.append(table);
+      root.append(field,wrap);
     }).catch(()=>{if(output.isConnected)output.textContent='โหลดทะเบียนผู้ป่วยไม่ได้ กรุณาเข้าสู่ระบบใหม่แล้วลองอีกครั้ง'});
   }
   function registerPatient(root){
@@ -476,6 +519,7 @@ button:disabled{cursor:not-allowed;opacity:.55}
     button.type='submit';
     const status=node('p','');
     status.setAttribute('role','status');
+    form.className='form-grid';
     form.append(button,status);
     root.append(form);
     form.onsubmit=async event=>{
@@ -496,6 +540,41 @@ button:disabled{cursor:not-allowed;opacity:.55}
       finally{button.disabled=false}
     };
   }
+  function renderCalendar(root){
+    const title=root.querySelector('[data-calendar-title]');
+    const grid=root.querySelector('[data-calendar-grid]');
+    const bangkokDate=()=>{
+      const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Bangkok',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+      const date=Object.fromEntries(parts.map(({type,value})=>[type,value]));
+      return [Number(date.year),Number(date.month)-1,Number(date.day)];
+    };
+    const [year,month,today]=bangkokDate();
+    let cursor=new Date(Date.UTC(year,month,1));
+    const draw=()=>{
+      title.textContent=new Intl.DateTimeFormat('th-TH',{timeZone:'UTC',month:'long',year:'numeric'}).format(cursor);
+      grid.replaceChildren();
+      for(let i=0;i<(cursor.getUTCDay()+6)%7;i++)grid.append(document.createElement('span'));
+      const days=new Date(Date.UTC(cursor.getUTCFullYear(),cursor.getUTCMonth()+1,0)).getUTCDate();
+      for(let day=1;day<=days;day++){
+        const cell=node('span',String(day));
+        cell.className='btn';
+        if(day===today&&cursor.getUTCFullYear()===year&&cursor.getUTCMonth()===month)cell.setAttribute('aria-current','date');
+        grid.append(cell);
+      }
+    };
+    for(const button of root.querySelectorAll('[data-month]'))button.onclick=()=>{
+      const offset=Number(button.dataset.month);
+      cursor=offset?new Date(Date.UTC(cursor.getUTCFullYear(),cursor.getUTCMonth()+offset,1)):new Date(Date.UTC(year,month,1));
+      draw();
+    };
+    draw();
+  }
+  page.addEventListener('click',event=>{
+    const link=event.target.closest('[data-eph-link]');
+    if(!link||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
+    event.preventDefault();
+    go(link.pathname.slice(basePath.length+1));
+  });
   function renderRoute(){
     const staff=activeStaff();
     if(!staff)return;
@@ -504,20 +583,26 @@ button:disabled{cursor:not-allowed;opacity:.55}
     const path=location.pathname.replace(/^\/eph(?=\/|$)/,'').replace(/^\/|\/$/g,'')||'dashboard';
     const key=aliases[path]||(path.startsWith('patients/')?'patients':path);
     for(const button of nav)button.classList.toggle('active',button.dataset.page===key);
-    page.replaceChildren(node('h1',titles[key]||'ไม่พบหน้าที่ต้องการ'));
-    const card=document.createElement('div');
-    card.className='card';
-    page.append(card);
-    if(key==='dashboard'){
-      card.append(node('h2','งานทะเบียนผู้ป่วย'));
-      const button=node('button','เปิดทะเบียนผู้ป่วย');
-      button.className='btn primary';
-      button.onclick=()=>go('patients/register');
-      card.append(button);
+    const heading=document.createElement('div');
+    heading.className='heading';
+    const headingText=document.createElement('div');
+    const pageHeadings={"dashboard":"<h1>ภาพรวมคลินิก</h1><p>สรุปงานประจำวันและรายการที่ต้องติดตาม</p>","appointments":"<h1>ตารางนัดหมาย</h1><p>เลือกวันในปฏิทินเพื่อดูเวลา รายการนัด และสถานะ</p>","patient-registration":"<h1>ทะเบียนผู้ป่วยรายใหม่</h1><p>เลือกช่องทางลงทะเบียนและติดตามเอกสารก่อนรับบริการ</p>","patients":"<h1>ทะเบียนและการรักษา</h1><p>ค้นหาด้วยชื่อหรือนามสกุล แล้วเลือกผู้ป่วยก่อนเปิดเวชระเบียน</p>","coding":"<h1>รหัส Coding</h1><p>มาตรฐานรหัสทะเบียนผู้ป่วยและการแสดงผลบนเอกสาร</p>","outcomes":"<h1>ผลลัพธ์การรักษาและ KPI</h1><p>ติดตามผลราย Visit จากข้อมูลที่บันทึกไว้ โดยไม่ต้องกรอกซ้ำ</p>","billing":"<h1>การเงินหลังบ้าน</h1><p>สรุปยอดรับชำระตามวันที่และช่องทาง</p>","stock":"<h1>คลังวัสดุ</h1><p>รับเข้า เบิกใช้ และติดตามล็อตวัสดุคลินิก</p>","accounting":"<h1>บัญชีและปิดยอด</h1><p>ตรวจรายการรับ–จ่ายและกระทบยอดประจำวัน</p>","reports":"<h1>รายงานและวิเคราะห์</h1><p>Reports &amp; Analytics · สรุปการดำเนินงานของคลินิก</p>","imc-adl":"<h1>IMC ADL</h1><p>คลังข้อมูล / ประวัติการประเมิน Barthel ADL</p>","sitemap":"<h1>ผังเมนู</h1><p>ค้นหาทางเข้าของแต่ละงานจากจุดเดียว</p>"};
+    if(pageHeadings[key])headingText.innerHTML=pageHeadings[key];
+    else headingText.append(node('h1',titles[key]||'ไม่พบหน้าที่ต้องการ'));
+    heading.append(headingText);
+    page.replaceChildren(heading);
+    const layout=document.getElementById('layout-'+key);
+    if(layout)page.append(layout.content.cloneNode(true));
+    const card=page.querySelector('[data-module]')||document.createElement('div');
+    if(!layout){card.className='card';page.append(card)}
+    if(key==='appointments'){
+      renderCalendar(page);
     }else if(key==='patients'||key==='patient-register'){
       showPatients(card);
     }else if(key==='patient-registration'&&['admin','physiotherapist','reception'].includes(staff.role)){
       registerPatient(card);
+    }else if(key==='patient-registration'){
+      card.append(node('p','บัญชีนี้ไม่มีสิทธิ์เพิ่มผู้ป่วย'));
     }else if(key==='users'){
       card.append(node('p',staff.name+' · '+staff.role));
     }else if(key==='coding'){
@@ -532,7 +617,7 @@ button:disabled{cursor:not-allowed;opacity:.55}
         list.append(item);
       }
       card.append(list);
-    }else{
+    }else if(!layout){
       card.append(node('p','เมนูนี้ยังไม่เปิดบันทึกข้อมูลจริง'));
     }
   }
